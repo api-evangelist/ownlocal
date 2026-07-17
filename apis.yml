@@ -1,0 +1,25 @@
+aid: ownlocal
+name: OwnLocal
+description: OwnLocal is a company surfaced as a portfolio company of 500-global and added to the API
+  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+url: https://raw.githubusercontent.com/api-evangelist/ownlocal/refs/heads/main/apis.yml
+x-type: company
+x-source: vc-portfolio
+x-backed-by:
+- 500-global
+x-tier: stub
+x-tier-reason: portfolio-lead
+specificationVersion: '0.20'
+created: '2026-07-17'
+modified: '2026-07-17'
+tags:
+- Company
+apis: []
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+common:
+- type: Website
+  url: https://ownlocal.com
