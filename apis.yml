@@ -1,7 +1,10 @@
 aid: ownlocal
 name: OwnLocal
-description: OwnLocal is a company surfaced as a portfolio company of 500-global and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: OwnLocal is an Austin-based automated digital advertising platform for local media companies.
+  It helps newspapers, local publishers, and media companies power their digital services by automatically
+  converting traditional print advertisements into online marketing campaigns, extending advertiser reach
+  across search, social, and display channels. OwnLocal was a 500 Global portfolio company; its current
+  public surface is a marketing site with no published developer or API program.
 url: https://raw.githubusercontent.com/api-evangelist/ownlocal/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,11 +12,29 @@ x-backed-by:
 - 500-global
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://ucarecdn.com/0f20cb5b-5f4e-4207-be36-a5ee95dd54b5/ogimage1800optimized.png
 tags:
 - Company
+- Advertising
+- Local Media
+- Digital Advertising
+- Marketing
+- Newspapers
+- AdTech
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -23,3 +44,14 @@ maintainers:
 common:
 - type: Website
   url: https://ownlocal.com
+- type: Support
+  url: https://www.ownlocal.com/contact
+- type: GitHubOrganization
+  url: https://github.com/ownlocal
+- type: DomainSecurity
+  url: security/ownlocal-domain-security.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: minimal
+  artifacts_added: 1
+  pass: local-v1
