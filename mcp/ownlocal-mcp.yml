@@ -1,0 +1,149 @@
+generated: '2026-08-12'
+method: derived
+status: candidate
+source: >-
+  Derived from openapi/ownlocal-*-openapi.yml (13 operations converted from OwnLocal's published Swagger 2.0
+  at https://admin.austin.ownlocal.com/api-docs/v1/swagger.json). No OwnLocal MCP server exists.
+api: OwnLocal API v1
+
+published_server:
+  exists: false
+  url: null
+  searched:
+  - https://api.docs.ownlocal.com/ (full reference — no MCP, agent or tool section)
+  - https://www.ownlocal.com/ and /products/ /support/ /contact/
+  - https://admin.austin.ownlocal.com/.well-known/ai-plugin.json (404)
+  - https://admin.austin.ownlocal.com/.well-known/agent-card.json (404)
+  - https://ownlocal.com/.well-known/agent-card.json (404)
+  - github.com/OwnLocal (49 public repositories, none MCP-related)
+  detail: >-
+    OwnLocal publishes no hosted or remote MCP server, no ai-plugin manifest, and no agent surface of any
+    kind. Everything below is a CANDIDATE tool set derived from the real REST contract — it describes what an
+    MCP server over this API would expose, not something OwnLocal ships. Do not present it as a live endpoint.
+
+transport: null
+auth:
+  scheme: api-key-header
+  header: Authorization
+  prefix: none
+  note: >-
+    Any MCP wrapper would carry the organization API key raw in the Authorization header. There is no OAuth,
+    so an MCP server here could not use the OAuth-protected-resource pattern; the key would have to be
+    configured per server instance, and it is organization-scoped, meaning one server instance = one
+    publisher's tenancy.
+
+candidate_tools:
+- name: list_ads
+  rest: listAds
+  category: read
+  description: >-
+    List ads, filtered by category, sub-category, offer count, start/end/created/modified date ranges,
+    business ids or publisher ids; paged and sortable.
+  input_schema_source: openapi/ownlocal-ads-openapi.yml#/paths/~1api~1v1~1ads/get/parameters
+  consequence: none
+- name: get_ad
+  rest: getAd
+  category: read
+  description: Retrieve one ad by UUID, including extracted ad text and machine-extracted offers.
+  input_schema_source: openapi/ownlocal-ads-openapi.yml#/paths/~1api~1v1~1ads~1{adUuid}/get
+  consequence: none
+- name: create_ad
+  rest: createAd
+  category: write
+  description: >-
+    Create an ad record under a publisher, optionally bound to a business, with start/end run dates. Returns
+    the adUuid and a content_url to upload the print PDF to.
+  consequence: creates-billable-record
+  caution: >-
+    NOT idempotent and NOT reversible through the API — there is no DELETE on ads. A retried call after a
+    timeout creates a second ad. An agent must confirm before calling and must dedupe on adCustomId itself.
+- name: update_ad
+  rest: updateAd
+  category: write
+  description: Update an existing ad (PATCH).
+  consequence: mutates-existing-record
+- name: upload_ad_content
+  rest: uploadAdContent
+  category: write
+  description: >-
+    Upload the source print-ad PDF for an ad. Returns 202 — conversion is asynchronous with no completion
+    callback, so a caller must poll get_ad until image/adText/offers populate.
+  consequence: triggers-async-processing
+  binary: true
+  caution: Binary multipart upload; poorly suited to a text-mode agent without a file handle.
+- name: list_businesses
+  rest: listBusinesses
+  category: read
+  description: List local businesses (advertisers), filtered by category, date ranges and publisher ids; paged.
+  consequence: none
+- name: get_business
+  rest: getBusiness
+  category: read
+  description: Retrieve one business by UUID, with locations, opening hours, categories, social profiles and imagery.
+  consequence: none
+- name: create_business
+  rest: createBusiness
+  category: write
+  description: Create a local business record under one or more publishers.
+  consequence: creates-record
+  caution: Not idempotent; no DELETE exists to undo a duplicate.
+- name: upload_business_logo
+  rest: uploadBusinessLogo
+  category: write
+  description: Upload a logo image for a business. Returns 202.
+  consequence: mutates-existing-record
+  binary: true
+- name: upload_business_image
+  rest: uploadBusinessImage
+  category: write
+  description: Upload a gallery image for a business. Returns 202.
+  consequence: mutates-existing-record
+  binary: true
+- name: list_categories
+  rest: listCategories
+  category: read
+  description: >-
+    Retrieve the OwnLocal category / sub-category vocabulary. The prerequisite lookup for classifying a
+    business or filtering ads — an agent should call this before create_business.
+  consequence: none
+- name: get_ads_report
+  rest: getAdsReport
+  category: read
+  description: >-
+    Build a performance report for every ad a publisher ran in a date window — impressions, interaction
+    breakdown by click target, leads, digital lift.
+  consequence: none
+  note: Report generation is described as "builds and returns"; may be expensive over wide date ranges.
+- name: get_business_report
+  rest: getBusinessReport
+  category: read
+  description: >-
+    Build a performance report for one business under a publisher — reach report plus search keyword rank
+    history and SERP context.
+  consequence: none
+
+tool_count: 13
+read_tools: 7
+write_tools: 6
+
+gaps_for_agent_use:
+- gap: No publisher discovery
+  detail: >-
+    Every write and every report requires a publisherUuid, and no operation lists the publishers a key can
+    see. An agent cannot bootstrap — the tenancy id must be supplied out of band.
+  severity: high
+- gap: No idempotency
+  detail: create_ad / create_business cannot be safely retried, and no DELETE exists to clean up duplicates.
+  severity: high
+  see: conventions/ownlocal-conventions.yml
+- gap: No async completion signal
+  detail: Three tools return 202 with no callback; polling is the only completion strategy.
+  severity: medium
+- gap: No rate-limit signal
+  detail: 429 is enforced but unquantified and header-less, so an agent cannot pace itself.
+  severity: medium
+  see: rate-limits/ownlocal-rate-limits.yml
+- gap: Unschema'd errors
+  detail: Only 3 of 13 operations declare a typed error body; 401/403/429 appear on no operation.
+  severity: medium
+  see: errors/ownlocal-problem-types.yml

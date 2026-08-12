@@ -1,0 +1,151 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/ownlocal-ads-openapi.yml, openapi/ownlocal-businesses-openapi.yml,
+  openapi/ownlocal-categories-openapi.yml, openapi/ownlocal-reports-data-api-openapi.yml (4xx/5xx responses),
+  enriched from the Errors section of the published API reference at https://api.docs.ownlocal.com/
+docs: https://api.docs.ownlocal.com/
+format: http-status
+rfc9457: false
+note: >-
+  OwnLocal does NOT use RFC 9457 problem+json. Errors are signalled by HTTP status code alone. The published
+  reference lists a status-code table with one-line meanings and no machine-readable error body; the only
+  typed error payload anywhere in the contract is `unacceptableContent`, returned as application/json on the
+  three upload operations. Every other declared failure response in the spec carries a description and no
+  schema, so an agent cannot programmatically distinguish two different 400s on the same operation.
+error_envelope:
+  media_type: application/json
+  documented_shape: partial
+  schemas:
+  - name: unacceptableContent
+    used_by:
+    - uploadAdContent
+    - uploadBusinessImage
+    - uploadBusinessLogo
+    status: '400'
+    source: openapi/_original/ownlocal-swagger.json (#/definitions/unacceptableContent)
+  note: >-
+    Success payloads on create operations carry a `status` and `message` string (e.g. the 201 on createAd),
+    but that envelope is not reused for errors.
+problem_types:
+- code: '400'
+  title: Bad Request
+  meaning: Your request is invalid.
+  operations:
+  - uploadAdContent
+  - updateAd
+  - uploadBusinessImage
+  - uploadBusinessLogo
+  schema: unacceptableContent
+  spec_description: Content could not be saved
+  remediation: >-
+    On the upload operations this is the content-rejection path — inspect the unacceptableContent body. The
+    ad upload accepts PDF only; business logo/image uploads accept image media types.
+  source: openapi + docs
+- code: '401'
+  title: Unauthorized
+  meaning: Your API key is wrong.
+  operations: []
+  schema: null
+  remediation: >-
+    Send the organization API key raw in the Authorization header with no scheme prefix (not `Bearer`).
+    Keys are issued by OwnLocal support.
+  source: docs
+  note: Documented in the reference error table but NOT declared on any operation in the OpenAPI.
+- code: '403'
+  title: Forbidden
+  meaning: The resource requested is hidden for administrators only.
+  operations: []
+  schema: null
+  remediation: The key's organization is not entitled to this resource. Contact OwnLocal support.
+  source: docs
+  note: Documented in the reference error table but NOT declared on any operation in the OpenAPI.
+- code: '404'
+  title: Not Found
+  meaning: The specified resource could not be found.
+  operations:
+  - getAd
+  - getBusiness
+  schema: null
+  spec_description: ad not found / business not found
+  remediation: Verify the adUuid / businessUuid. Ids are UUIDs scoped to the calling organization.
+  source: openapi + docs
+- code: '405'
+  title: Method Not Allowed
+  meaning: You tried to access a resource with an invalid method.
+  operations:
+  - createAd
+  - createBusiness
+  schema: null
+  spec_description: Invalid input
+  remediation: >-
+    Note the mismatch — the reference defines 405 as a method error, but the OpenAPI declares 405 on the two
+    create operations with the description "Invalid input", i.e. as a validation failure. Treat 405 on
+    createAd/createBusiness as a malformed request body, and check required fields (publisherUuid on an ad;
+    publishers[] and name on a business).
+  source: openapi + docs
+  divergence: true
+- code: '406'
+  title: Not Acceptable
+  meaning: You requested a format that isn't json.
+  operations: []
+  schema: null
+  remediation: Request application/json. The API serves no other representation.
+  source: docs
+- code: '410'
+  title: Gone
+  meaning: The resource requested has been removed from our servers.
+  operations: []
+  schema: null
+  remediation: The record was deleted. Do not retry; re-create or stop referencing the id.
+  source: docs
+- code: '418'
+  title: I'm a teapot
+  meaning: I'm a teapot.
+  operations: []
+  schema: null
+  remediation: >-
+    Carried verbatim from the Slate documentation template. Recorded for fidelity; no OwnLocal operation
+    declares it and it should not be handled.
+  source: docs
+  boilerplate: true
+- code: '429'
+  title: Too Many Requests
+  meaning: You're requesting too many resources! Slow down!
+  operations: []
+  schema: null
+  remediation: >-
+    Back off and retry. No Retry-After or RateLimit-* response header is documented, and no numeric limit is
+    published — see rate-limits/ownlocal-rate-limits.yml. An agent has to fall back to blind exponential
+    backoff.
+  source: docs
+- code: '500'
+  title: Internal Server Error
+  meaning: We had a problem with our server. Try again later.
+  operations: []
+  schema: null
+  remediation: Retry with backoff. Reads are safe to retry; writes are not idempotent — see conventions/.
+  source: docs
+- code: '503'
+  title: Service Unavailable
+  meaning: We're temporarily offline for maintenance. Please try again later.
+  operations: []
+  schema: null
+  remediation: Retry with backoff. Check https://status.ownlocal.com/.
+  source: docs
+coverage:
+  documented_codes: 11
+  codes_declared_in_openapi: 4
+  codes_documented_only: 7
+  operations_with_any_error_response: 8
+  operations_with_no_error_response: 5
+  operations_missing_errors:
+  - listAds
+  - listBusinesses
+  - listCategories
+  - getAdsReport
+  - getBusinessReport
+  gap: >-
+    Five of thirteen operations declare only a 200 and no failure response at all, and 401/403/429 — the
+    three an integrator is most likely to hit — appear in the prose table but on no operation in the machine
+    contract.

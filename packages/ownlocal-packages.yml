@@ -1,0 +1,133 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  registry.npmjs.org (name lookups + full-text search), pypi.org, rubygems.org (name + search),
+  search.maven.org, api.nuget.org, packagist.org, crates.io, proxy.golang.org, plus
+  https://api.docs.ownlocal.com/ and the github.com/OwnLocal organization
+api: OwnLocal API v1
+package_count: 0
+official_sdk_count: 0
+
+note: >-
+  An honest zero for API clients. OwnLocal publishes NO client library for the OwnLocal API in any package
+  registry, and its API reference offers no SDK — the only code samples in the reference are raw `curl`
+  invocations, and there is no SDK, Libraries or Downloads section anywhere in the documentation. Because
+  there is no first-party SDK, NO `type: SDKs` pointer is emitted in apis.yml; only `type: Packages`, which
+  points at this recorded absence.
+
+packages: []
+
+registry_searches:
+- registry: npm
+  endpoint: https://registry.npmjs.org
+  queries:
+  - name: ownlocal
+    status: 404
+  - name: ownlocal-api
+    status: 404
+  - name: '@ownlocal/api'
+    status: 404
+  - full_text: ownlocal
+    results: 0
+  found: 0
+- registry: pypi
+  endpoint: https://pypi.org/pypi/ownlocal/json
+  status: 404
+  found: 0
+- registry: rubygems
+  endpoint: https://rubygems.org/api/v1/search.json?query=ownlocal
+  results: 0
+  found: 0
+  note: >-
+    Relevant because OwnLocal's own stack is substantially Ruby (its public GitHub org carries a Ruby style
+    guide and several Ruby projects), which is where a first-party client would most plausibly have landed.
+- registry: maven-central
+  endpoint: https://search.maven.org/solrsearch/select?q=ownlocal
+  results: 0
+  found: 0
+- registry: nuget
+  endpoint: https://api.nuget.org/v3/registration5-semver1/ownlocal/index.json
+  status: 404
+  found: 0
+- registry: packagist
+  endpoint: https://packagist.org/search.json?q=ownlocal
+  results: 6
+  found: 0
+  note: All six are unrelated fuzzy matches (tevo-harvester, openl10n, unlocalizedcrop, driver-cdn-awslocal). None is OwnLocal.
+- registry: crates.io
+  endpoint: https://crates.io/api/v1/crates?q=ownlocal
+  results: 0
+  found: 0
+- registry: go-modules
+  endpoint: https://proxy.golang.org
+  found: 0
+  note: >-
+    No Go client for the OwnLocal API. Several github.com/OwnLocal/* modules DO resolve on the module proxy,
+    but none of them is a client for this API — see org_published_modules below.
+
+docs_search:
+  sdk_section: false
+  code_samples:
+  - language: shell
+    tool: curl
+  detail: >-
+    The Slate reference exposes a single language tab ("shell"). Every example is a curl command against
+    https://admin.austin.ownlocal.com/api/v1/... with a raw Authorization header. No generated or
+    hand-written client is offered, and no Postman collection or OpenAPI download link is surfaced in the
+    documentation (the Swagger definition is reachable at /api-docs/v1/swagger.json but is not linked from
+    the reference).
+
+org_published_modules:
+  note: >-
+    Recorded for completeness, NOT counted as SDKs. These are general-purpose infrastructure libraries in
+    OwnLocal's GitHub organization that resolve on the Go module proxy. None of them touches the OwnLocal
+    API; they are internal engineering tooling from OwnLocal's Go/Ruby era. Fork-versus-original status
+    could not be re-verified at probe time (the GitHub REST API rate-limited this run), and several have
+    well-known upstreams, so `official` is deliberately left false rather than asserted.
+  modules:
+  - name: github.com/OwnLocal/rv
+    registry: go-modules
+    version: v2.0.0+incompatible
+    published: '2016-10-03'
+    description: HTTP request parsing and validation for Go.
+    api_client: false
+    official: false
+    source: https://proxy.golang.org/github.com/!own!local/rv/@latest
+  - name: github.com/OwnLocal/goes
+    registry: go-modules
+    version: v1.0.0
+    published: '2016-07-26'
+    description: A library to interact with Elasticsearch in Go.
+    api_client: false
+    official: false
+    source: https://proxy.golang.org/github.com/!own!local/goes/@latest
+  - name: github.com/OwnLocal/slug
+    registry: go-modules
+    version: v1.0.3
+    published: '2016-11-16'
+    description: URL-friendly slugify with multiple languages support.
+    api_client: false
+    official: false
+    source: https://proxy.golang.org/github.com/!own!local/slug/@latest
+  - name: github.com/OwnLocal/roll
+    registry: go-modules
+    version: v0.0.0-20161003223154-144ccb859f97
+    published: '2016-10-03'
+    description: Simple(er) Rollbar client for Go. Pseudo-version only — never tagged a release.
+    api_client: false
+    official: false
+    source: https://proxy.golang.org/github.com/!own!local/roll/@latest
+  - name: github.com/OwnLocal/env
+    registry: go-modules
+    version: v0.0.0-20141112225230-8f94815dbbf9
+    published: '2014-11-12'
+    description: Go support library for using environment variables for configuration. Pseudo-version only — never tagged a release.
+    api_client: false
+    official: false
+    source: https://proxy.golang.org/github.com/!own!local/env/@latest
+
+currency_finding: >-
+  There is no first-party SDK whose release date can be compared against the API, so the usual abandonment
+  signal is unavailable here. The nearest proxy is that every OwnLocal module that IS published to a registry
+  last shipped between 2014 and 2016, and the newest public push in the organization is from 2023 — against
+  a live v1 API whose documentation examples are dated 2019-2021.

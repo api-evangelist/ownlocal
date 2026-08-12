@@ -1,0 +1,54 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://www.ownlocal.com/ , https://www.ownlocal.com/products/ , https://www.ownlocal.com/support/ ,
+  https://www.ownlocal.com/contact/ , https://api.docs.ownlocal.com/ — searched for a pricing, plans or
+  packages page across the marketing site and the API reference
+api: OwnLocal API v1
+plan_count: 0
+public_pricing: false
+self_serve: false
+free_tier: false
+trial: false
+
+note: >-
+  An honest zero. OwnLocal publishes NO pricing of any kind — no plans page, no tiers, no per-call or
+  per-ad rate card, and no API-specific pricing. https://www.ownlocal.com/pricing returns 404, and the site's
+  navigation carries only About, Products, Jobs, Support and Contact. The API reference states that keys are
+  obtained by contacting support ("Contact our support team to get your API key"), which is the only
+  commercial onboarding signal published.
+
+plans: []
+
+access_model:
+  model: partner / contact-sales
+  detail: >-
+    OwnLocal sells to local media companies — newspapers and publishers — not to individual developers. The
+    API is a partner integration surface for those publishers, and access is bundled into that commercial
+    relationship rather than sold as a product. There is no developer signup, no self-serve key issuance, no
+    console, and no billing surface on any public host.
+  key_provisioning: manual, via support@ownlocal.com
+  buyer: local media companies / newspaper publishers
+  sold_to_developers: false
+
+quotas:
+  published: false
+  detail: >-
+    No included call volume, ad volume, or overage schedule is published. The only enforced ceiling with any
+    public trace is the undocumented rate limit behind the 429 in the error table.
+  see: rate-limits/ownlocal-rate-limits.yml
+
+evidence:
+- url: https://www.ownlocal.com/pricing
+  status: 404
+- url: https://www.ownlocal.com/products/
+  status: 200
+  finding: Products page renders client-side; no pricing content served.
+- url: https://www.ownlocal.com/support/
+  status: 200
+  finding: Contact form and support@ownlocal.com only; no plans or rate card.
+- url: https://api.docs.ownlocal.com/
+  status: 200
+  finding: >-
+    Full API reference with no pricing, quota or billing section. Authentication section directs the reader
+    to contact support for a key.

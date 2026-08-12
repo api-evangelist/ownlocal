@@ -1,0 +1,126 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://api.docs.ownlocal.com/ (published API reference),
+  https://admin.austin.ownlocal.com/api-docs (Swagger UI definition list),
+  https://admin.austin.ownlocal.com/api-docs/v1/swagger.json, https://status.ownlocal.com/,
+  https://www.ownlocal.com/support/
+api: OwnLocal API v1
+
+versioning:
+  scheme: uri-path
+  current_version: v1
+  version_in: path
+  pattern: /api/v{n}/...
+  versions_published:
+  - version: v1
+    label: API V1 Docs
+    status: current
+    source: Swagger UI definition list at /api-docs
+  version_header: null
+  media_type_versioning: false
+  date_versioning: false
+  detail: >-
+    One version has ever shipped. The Swagger UI at /api-docs is configured with a single definition
+    ("API V1 Docs" -> /api-docs/v1/swagger.json), so there is no v2 in flight and no beta channel published.
+  spec_version_field: v1
+  spec_version_note: >-
+    The OpenAPI `info.version` is the literal string "v1" — the API's interface version, not a release
+    version. There is no build/release number anywhere in the contract, so a consumer cannot detect that the
+    spec changed except by diffing it.
+
+deprecation_policy:
+  published: false
+  url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  detail: >-
+    No deprecation policy, no notice period, no RFC 8594 Sunset/Deprecation headers, and no `deprecated: true`
+    on any operation or field in the published contract. A consumer gets no advance machine-readable warning
+    of a breaking change.
+  deprecated_operations: []
+  deprecated_operations_source: openapi (0 of 13 operations flagged)
+
+sla:
+  published: false
+  uptime_target: null
+  support_response_target: null
+  detail: >-
+    No SLA, uptime commitment, or support response target is published on any public OwnLocal surface. The
+    support page offers a contact form and support@ownlocal.com with no stated response time.
+
+status_page:
+  published: true
+  url: https://status.ownlocal.com/
+  provider: self-hosted
+  http_status: 200
+  machine_readable: false
+  history: false
+  subscribe: false
+  detail: >-
+    OwnLocal serves a status page from its own domain, titled "OwnLocal Status". It is a self-built static
+    page on the same Firebase/GitHub-Pages stack as the marketing site, NOT an Atlassian Statuspage — there
+    is no /api/v2/summary.json (that path returns a GitHub Pages 404), no component list, no incident
+    history, and no subscribe control. The status indicator and comment are rendered client-side into empty
+    `<h1>` / `<p class="comment">` elements, so a machine fetching the page reads no status at all. It also
+    still carries a "© 2021 OwnLocal, Inc" footer.
+  probed: '2026-08-12'
+  caveat: >-
+    Present as a page, not consumable as a signal. Recorded as a StatusPage because the provider genuinely
+    publishes it; an agent cannot use it for health.
+
+changelog:
+  published: false
+  url: null
+  detail: >-
+    No API changelog, release notes, or dated version history is published. The reference is a single
+    undated Slate page and the spec carries no release identifier.
+
+release_channels:
+  beta: false
+  preview: false
+  sandbox: false
+  detail: >-
+    No sandbox, test mode, or test key prefix is documented — every documented call goes at production. See
+    the absence of sandbox/ in this repo.
+
+asynchronous_completion:
+  documented: false
+  detail: >-
+    uploadAdContent, uploadBusinessImage and uploadBusinessLogo all return 202 Accepted, so PDF-to-digital
+    conversion is asynchronous, but OwnLocal publishes no webhook, callback or job-status resource to signal
+    completion or failure. There is no lifecycle event surface at all — polling getAd for populated derived
+    fields is the only option.
+  webhooks: false
+  events: false
+
+api_stability:
+  contract_source: https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
+  contract_format: Swagger 2.0
+  contract_format_note: >-
+    OwnLocal still publishes Swagger 2.0 (OpenAPI 2.0), superseded by OpenAPI 3.0 in 2017 and 3.1 in 2021.
+    The refined 3.1.0 documents in openapi/ are API Evangelist conversions; the provider's own artifact is 2.0.
+  staleness_signals:
+  - signal: reference examples dated 2019-2021
+    detail: Every example payload in the reference and the spec carries 2019, 2020 or 2021 dates.
+  - signal: status page footer reads "© 2021 OwnLocal, Inc"
+  - signal: no published package or SDK in any registry
+    see: packages/ownlocal-packages.yml
+  - signal: documentation host is a GitHub Pages site whose backing repository is not public
+    detail: >-
+      api.docs.ownlocal.com CNAMEs to ownlocal.github.io/api_docs, but OwnLocal/api_docs returns 404 on the
+      GitHub API and does not appear among the org's 49 public repositories — the site is live, its source is not.
+  - signal: the most recently pushed public repository in the GitHub org is from 2023, most from 2016-2020
+  note: >-
+    The contract is LIVE — the Swagger UI and swagger.json both answer 200 today — but every dating signal
+    around it points at 2019-2021. Recorded as observed, not as a judgement about whether the API is
+    supported.
+
+support:
+  channel: email + web form
+  email: support@ownlocal.com
+  url: https://www.ownlocal.com/support/
+  key_provisioning: >-
+    API keys are issued by contacting OwnLocal support; there is no self-serve developer signup or key
+    management console on any public surface.

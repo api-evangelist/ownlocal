@@ -1,0 +1,277 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/ownlocal-ads-openapi.yml, openapi/ownlocal-businesses-openapi.yml,
+  openapi/ownlocal-categories-openapi.yml, openapi/ownlocal-reports-data-api-openapi.yml — derived from
+  component schemas, $ref links and *Uuid id-reference fields; entity prose cross-read against the Models
+  section of https://api.docs.ownlocal.com/
+docs: https://api.docs.ownlocal.com/
+api: OwnLocal API v1
+identifier_scheme:
+  style: uuid
+  prefixed: false
+  detail: >-
+    All primary keys are unprefixed UUIDs. There is no id-prefix convention (no `ad_`, `biz_`), so an
+    identifier is not self-describing — the field name is the only thing that says what an id points at.
+  exception:
+    entity: SubCategory
+    style: small integer
+    field: primary_sub_cat_id
+
+entities:
+- name: Ad
+  schema: ad
+  description: >-
+    A print advertisement submitted to OwnLocal and machine-converted into a digital ad unit (an "Origami"
+    ad). The record is created first, then the source PDF is uploaded against it, then OwnLocal's pipeline
+    populates the derived fields.
+  primary_key: adUuid
+  required:
+  - adUuid
+  - businessUuid
+  - publisherUuid
+  - startDate
+  - endDate
+  - dateModified
+  - dateCreated
+  caller_supplied_fields:
+  - adCustomId
+  - startDate
+  - endDate
+  derived_fields:
+  - field: image
+    detail: Rendered ad image, populated asynchronously after PDF conversion.
+  - field: adText
+    detail: Text extracted from the print PDF by OwnLocal's conversion pipeline.
+  - field: offers
+    detail: Offers/coupons machine-extracted from the ad creative.
+  - field: offerCount
+    detail: Count of extracted offers; a denormalized convenience field over offers[].
+  operations:
+  - createAd
+  - listAds
+  - getAd
+  - updateAd
+  - uploadAdContent
+
+- name: Offer
+  schema: offer
+  description: >-
+    A discount, coupon or promotion extracted from an ad's creative. Read-only — offers appear only nested
+    inside an Ad and have no top-level collection or endpoint of their own.
+  primary_key: offerUuid
+  required:
+  - offerUuid
+  - offerImage
+  - title
+  fields_of_note:
+  - bogo
+  - free
+  - validThrough
+  - gtin8
+  detail: >-
+    `gtin8` carries GS1 product-class codes, which is the only externally-standardized vocabulary anywhere in
+    the model. Price fields (originalPrice, discountPrice, newPrice, discountPercentage, discountOff) are all
+    typed as strings and are empty in the published examples.
+  operations: []
+  reachable_via:
+  - getAd
+  - listAds
+
+- name: Business
+  schema: business
+  description: >-
+    A local business — the advertiser. Carries the directory-listing payload OwnLocal publishes on behalf of
+    the business: name, locations, opening hours, categories, social profiles, imagery and payment methods.
+  primary_key: businessUuid
+  required: []
+  required_note: >-
+    The `business` schema declares NO required fields, even though the prose reference states that
+    `publishers` and `name` are REQUIRED on create. The machine contract is weaker than the documentation.
+  caller_supplied_fields:
+  - businessCustomId
+  - name
+  - website
+  - email
+  - description
+  - locations
+  - openingHours
+  - social
+  operations:
+  - createBusiness
+  - listBusinesses
+  - getBusiness
+  - uploadBusinessLogo
+  - uploadBusinessImage
+  no_delete: true
+  no_delete_detail: The API exposes no DELETE for any entity. Records can be created and updated, never removed.
+
+- name: Publisher
+  schema: null
+  description: >-
+    The local media company / newspaper under which an ad runs and a business is listed. IMPLICIT ENTITY — it
+    is referenced by UUID from Ad, Business and both report operations, and it is the unit that reports are
+    scoped to, but it has NO schema and NO endpoint. There is no way to list the publishers a key can see,
+    so an integrator must be told its publisherUuid values out of band.
+  primary_key: publisherUuid
+  gap: true
+  referenced_by:
+  - ad.publisherUuid
+  - business.publisherUuids
+  - getAdsReport.publisher_id
+  - getBusinessReport.publisher_id
+  operations: []
+
+- name: Category
+  schema: category
+  description: >-
+    A top-level business category with a map of numeric sub-category ids to sub-category names. The
+    controlled vocabulary used to classify businesses and to filter ads and businesses.
+  primary_key: title
+  fields:
+  - title
+  - subCategories
+  operations:
+  - listCategories
+
+- name: SubCategory
+  schema: null
+  description: >-
+    An entry inside Category.subCategories, keyed by a small integer id (e.g. 102 "Broadcasting Services").
+    Not a standalone schema — it is a map value. A business points at one via `primary_sub_cat_id` on create,
+    but reads it back as a NAME string in `subCategories[]`, so the id/name mapping is asymmetric between
+    write and read.
+  primary_key: integer id
+  asymmetry: true
+  operations: []
+
+- name: AdsReport
+  schema: ads_report
+  description: >-
+    A performance report for every ad a publisher ran in a date window — impressions, an interaction
+    breakdown by click target, leads and digital lift, per ad.
+  primary_key: null
+  scoped_to: publisher_id
+  operations:
+  - getAdsReport
+  spec_defect: >-
+    `ads_report.ads[]` items $ref `#/definitions/ad_reach`, which the source Swagger never defines. The
+    refined spec replaces it with an unconstrained object carrying x-ownlocal-unresolved-ref.
+
+- name: BusinessReport
+  schema: business_report
+  description: >-
+    A performance report for one business under one publisher — a reach report (print distribution, online
+    impressions, directory and Origami breakdowns, interactions) plus a search report with keyword rank
+    history and SERP context.
+  primary_key: null
+  scoped_to:
+  - publisher_id
+  - business_id
+  operations:
+  - getBusinessReport
+  spec_defect: >-
+    `business_report.reach_report` $refs `#/definitions/business_reach`, undefined in the source Swagger, and
+    does so via an `items` keyword on a `type: object` — `items` is only meaningful on an array. Two defects
+    in one field.
+
+- name: AdReport
+  schema: ad_report
+  description: >-
+    A flattened per-ad metrics row (online_impressions plus one field per interaction type). ORPHANED — it is
+    defined in the source Swagger but referenced by nothing, and is not reachable from any operation.
+  orphaned: true
+  operations: []
+
+- name: UnacceptableContent
+  schema: unacceptableContent
+  description: The single typed error body in the API — a `message` string returned with 400 on the three upload operations.
+  primary_key: null
+  operations: []
+
+relationships:
+- from: Ad
+  to: Business
+  type: belongs_to
+  via: ad.businessUuid
+  cardinality: many-to-one
+  confidence: high
+- from: Ad
+  to: Publisher
+  type: belongs_to
+  via: ad.publisherUuid
+  cardinality: many-to-one
+  confidence: high
+- from: Ad
+  to: Offer
+  type: has_many
+  via: ad.offers[]
+  embedded: true
+  cardinality: one-to-many
+  confidence: high
+- from: Business
+  to: Publisher
+  type: has_many
+  via: business.publisherUuids[]
+  cardinality: many-to-many
+  confidence: high
+  note: A business can be listed under several publishers; this is the only many-to-many in the model.
+- from: Business
+  to: Ad
+  type: has_many
+  via: ad.businessUuid (inverse)
+  cardinality: one-to-many
+  confidence: high
+  note: Not navigable directly — there is no /businesses/{id}/ads. Use listAds?businessUuids=<id>.
+- from: Business
+  to: Category
+  type: has_many
+  via: business.categories[]
+  by_value: true
+  cardinality: many-to-many
+  confidence: medium
+  note: Stored as category NAME strings on read, not ids.
+- from: Business
+  to: SubCategory
+  type: has_many
+  via: business.subCategories[] (read) / primary_sub_cat_id (write)
+  cardinality: many-to-many
+  confidence: medium
+  note: Asymmetric — integer id in, name string out.
+- from: Category
+  to: SubCategory
+  type: has_many
+  via: category.subCategories (id -> name map)
+  embedded: true
+  cardinality: one-to-many
+  confidence: high
+- from: AdsReport
+  to: Publisher
+  type: belongs_to
+  via: ads_report.publisher_id
+  cardinality: many-to-one
+  confidence: high
+- from: BusinessReport
+  to: Business
+  type: belongs_to
+  via: business_report.business_id
+  cardinality: many-to-one
+  confidence: high
+- from: BusinessReport
+  to: Publisher
+  type: belongs_to
+  via: getBusinessReport.publisher_id
+  cardinality: many-to-one
+  confidence: high
+
+graph_summary:
+  entities: 10
+  schemas_declared: 8
+  implicit_entities: 2
+  orphaned_schemas: 1
+  relationships: 11
+  root_entity: Publisher
+  root_note: >-
+    Publisher is the tenancy root — every ad, business and report hangs off it — and it is the one entity the
+    API never exposes. That is the single biggest gap in the model for an autonomous consumer.
+  render: null

@@ -1,0 +1,197 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/ownlocal-*-openapi.yml + openapi/_original/ownlocal-swagger.json, cross-read against
+  https://api.docs.ownlocal.com/ and https://www.ownlocal.com/privacy-policy/. Compliance claims were
+  searched for across ownlocal.com, the support and privacy pages, and every /.well-known/ path.
+api: OwnLocal API v1
+note: >-
+  Cross-cutting standards conformance. `conforms: false` with evidence is a measurement, not a criticism —
+  most of these standards are simply not applicable to or not adopted by this API. No `Compliance` pointer is
+  emitted in apis.yml because OwnLocal publishes no certification, audit report, or trust center.
+
+standards:
+- id: openapi
+  name: OpenAPI Specification
+  conforms: true
+  version: 2.0
+  evidence: >-
+    OwnLocal serves a machine-readable Swagger 2.0 definition at
+    https://admin.austin.ownlocal.com/api-docs/v1/swagger.json (HTTP 200, application/json), rendered by its
+    own Swagger UI at /api-docs. Declares 10 paths / 13 operations / 8 definitions / 1 securityDefinition.
+  caveat: >-
+    Swagger 2.0 only. No OpenAPI 3.0 or 3.1 document is published by the provider. The 3.1.0 documents in
+    openapi/ are API Evangelist conversions of that source.
+  defects:
+  - Two dangling $refs — #/definitions/ad_reach and #/definitions/business_reach are referenced but never defined.
+  - One orphaned definition — ad_report is defined and referenced by nothing.
+  - No operationId on any of the 13 operations.
+  - No host, basePath, or schemes — the spec never names its own server; the base URL is only in the prose reference.
+  - No global `tags` declaration (tags are used on operations but never described).
+  - business_report.reach_report applies `items` to a `type: object`.
+  - Several `required` values are the STRING "true" rather than the boolean true.
+  - '`format: string` used on string fields (not a valid format value).'
+
+- id: rfc9457
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    No application/problem+json media type anywhere in the contract, and no type/title/status/detail/instance
+    envelope. Errors are status-code-only; the single typed error body (unacceptableContent) is a bare
+    `{message}` object.
+  see: errors/ownlocal-problem-types.yml
+
+- id: rfc9110
+  name: RFC 9110 HTTP Semantics
+  conforms: partial
+  evidence: >-
+    Status code use is largely conventional — 201 on create, 202 on async accept, 404 on missing resource.
+    But the spec declares 405 (Method Not Allowed) as the validation-failure response on createAd and
+    createBusiness with the description "Invalid input", where 400 or 422 is the correct code; and `updateAd`
+    is a PATCH in the machine contract while the prose reference documents business update as a POST to the
+    item URL. The reference error table also carries 418 verbatim from the Slate template.
+
+- id: idempotency
+  name: Idempotency keys for unsafe methods
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header or equivalent is documented or declared. POST createAd and createBusiness are
+    not safely retryable, and there is no DELETE with which to clean up a duplicate.
+  see: conventions/ownlocal-conventions.yml
+
+- id: pagination
+  name: Documented, complete pagination
+  conforms: partial
+  evidence: >-
+    page/size query parameters are declared on all three list operations, so pagination exists and is
+    documented. But responses are bare JSON arrays with no total, no page count, and no next link, and the
+    default page size differs per collection (20/30/25). A client cannot detect the last page except by
+    over-fetching.
+  see: conventions/ownlocal-conventions.yml
+
+- id: rate-limit-headers
+  name: RFC 9239 / draft-ietf-httpapi-ratelimit-headers
+  conforms: false
+  evidence: >-
+    429 is documented in the reference error table, so a limit is enforced, but no RateLimit-*, X-RateLimit-*
+    or Retry-After response header is published or declared on any operation.
+  see: rate-limits/ownlocal-rate-limits.yml
+
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    The sole securityDefinition is `apiKey` in the Authorization header. No oauth2 flow is declared, and
+    /.well-known/oauth-authorization-server on the API host returns the site's SPA HTML catch-all, not RFC
+    8414 metadata.
+
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: >-
+    /.well-known/openid-configuration on admin.austin.ownlocal.com returns a 200 HTML shell from the SPA
+    catch-all route, not an OP metadata document. No OIDC surface exists.
+
+- id: rfc9116
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt and /security.txt return 404 on ownlocal.com, admin.austin.ownlocal.com and
+    api.docs.ownlocal.com.
+  see: well-known/ownlocal-well-known.yml
+
+- id: rfc8594
+  name: RFC 8594 Sunset header
+  conforms: false
+  evidence: No Sunset or Deprecation header, and no deprecation policy published.
+  see: lifecycle/ownlocal-lifecycle.yml
+
+- id: rfc9727
+  name: RFC 9727 api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns the SPA HTML catch-all, not a catalog document.
+
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  applicable: false
+  evidence: >-
+    No event, streaming or webhook surface exists to describe. The three 202-returning upload operations are
+    asynchronous but publish no completion callback, so there is nothing for an AsyncAPI document to cover.
+    Not penalized — genuinely N/A.
+
+- id: json-api
+  name: JSON:API
+  conforms: false
+  evidence: >-
+    No data/attributes/relationships envelope; responses are bare objects and arrays. (Note: the OwnLocal
+    GitHub org carries an archived 2014 fork of `json_api_client`, which is unrelated to this API's design.)
+
+- id: hateoas
+  name: Hypermedia controls
+  conforms: partial
+  evidence: >-
+    The only link anywhere in the model is `content_url` on the createAd 201 response, which points the
+    caller at the follow-up upload endpoint. There are no self links, no pagination links, and no relations
+    between resources.
+
+- id: schema-org
+  name: Schema.org vocabulary alignment
+  conforms: partial
+  evidence: >-
+    The business model borrows Schema.org LocalBusiness field names — `openingHours`, `locations[]` with
+    `streetAddress` / `addressLocality` / `addressRegion` / `postalCode`, `acceptedPaymentMethods`,
+    `conditionsOfAccess` — and the prose reference renders the same fields in snake_case. Alignment is by
+    naming convention only; no JSON-LD, no @context, no @type is emitted.
+  confidence: medium
+
+- id: gs1-gtin
+  name: GS1 GTIN-8 product classification
+  conforms: partial
+  evidence: The offer schema carries a `gtin8` array of product class codes. Only externally-standardized vocabulary in the model.
+  confidence: medium
+
+- id: tls
+  name: TLS 1.2+ on all API and documentation hosts
+  conforms: true
+  evidence: >-
+    TLSv1.3 on ownlocal.com, admin.austin.ownlocal.com and api.docs.ownlocal.com; HSTS enabled with
+    max-age 63072000 on the API host.
+  see: security/ownlocal-domain-security.yml
+
+compliance:
+  certifications_published: []
+  trust_center: false
+  soc2: false
+  iso27001: false
+  pci_dss: false
+  hipaa: false
+  gdpr_statement: false
+  ccpa_statement: false
+  detail: >-
+    No certification, audit report, trust center, subprocessor list or compliance page is published on any
+    OwnLocal surface. The privacy policy (dated January 1, 2020) makes a strong substantive privacy claim —
+    "OwnLocal software products used on the internet do not capture or store any personal information" and
+    "our advertising platforms purposefully do not have the capability to track or capture personal
+    information" — and names Freshdesk and Close.io as the systems holding support and sales contact data,
+    with a contact route at privacy@ownlocal.com. That is a privacy POSTURE, not a compliance attestation,
+    and it is not accompanied by a named regime or a certification, so no `Compliance` pointer is emitted.
+  privacy_policy: https://www.ownlocal.com/privacy-policy/
+  privacy_policy_dated: '2020-01-01'
+  terms_of_service: false
+  terms_note: >-
+    The status page footer links to https://ownlocal.com/terms-of-use/, which returns 404. There is no
+    reachable terms of service, and no API-specific terms of use, so no TermsOfService pointer is emitted.
+
+vulnerability_disclosure:
+  published: false
+  evidence: >-
+    probe-security-programs.py found no security.txt policy or contact, no bug bounty program on HackerOne,
+    Bugcrowd or Intigriti, and no disclosure page. No `Security` pointer is emitted.
+
+summary:
+  standards_evaluated: 17
+  conforms: 3
+  partial: 5
+  not_conformant: 8
+  not_applicable: 1

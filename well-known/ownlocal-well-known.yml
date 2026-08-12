@@ -1,0 +1,105 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probes of every OwnLocal host named in apis.yml and the OpenAPI servers[]
+note: >-
+  Recorded absence. Every /.well-known/ path was probed on the API host, the apex marketing site and the
+  documentation host. Nothing served a real discovery document, so NO WellKnown or SecurityTxt pointer is
+  emitted in apis.yml. Two classes of miss are recorded separately: a hard 404, and a soft-200 in which the
+  host's single-page-app catch-all answered 200 with an HTML shell for any unknown path. A soft-200 is a
+  MISS, not a hit — admin.austin.ownlocal.com returns the same ~25KB Rails/SPA HTML document for
+  /.well-known/openid-configuration, /.well-known/oauth-authorization-server, /.well-known/api-catalog and
+  /docs alike, which is a catch-all route, not published metadata.
+hosts:
+- host: https://admin.austin.ownlocal.com
+  role: API host (OpenAPI servers[] + apis.yml baseURL)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: soft-200-html
+    content_type: text/html; charset=utf-8
+    file: null
+    note: SPA catch-all HTML shell, not an OpenID Provider metadata document. Treated as a miss.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: soft-200-html
+    content_type: text/html; charset=utf-8
+    file: null
+    note: SPA catch-all HTML shell, not RFC 8414 metadata. Treated as a miss.
+  - path: /.well-known/api-catalog
+    status: 200
+    result: soft-200-html
+    content_type: text/html; charset=utf-8
+    file: null
+    note: SPA catch-all HTML shell, not an RFC 9727 catalog. Treated as a miss.
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: https://ownlocal.com
+  role: apex marketing site
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+  - path: /security.txt
+    status: 404
+    file: null
+  - path: /robots.txt
+    status: 200
+    result: empty-body
+    file: null
+    note: 200 with a zero-byte body — no directives served.
+- host: https://api.docs.ownlocal.com
+  role: documentation host (GitHub Pages, CNAME from ownlocal.github.io/api_docs)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+summary:
+  paths_probed: 27
+  real_documents_found: 0
+  soft_200_html_shells: 3
+  security_txt: false
+  agent_card: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  api_catalog: false
+  llms_txt: false

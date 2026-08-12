@@ -1,10 +1,15 @@
 aid: ownlocal
 name: OwnLocal
-description: OwnLocal is an Austin-based automated digital advertising platform for local media companies.
-  It helps newspapers, local publishers, and media companies power their digital services by automatically
-  converting traditional print advertisements into online marketing campaigns, extending advertiser reach
-  across search, social, and display channels. OwnLocal was a 500 Global portfolio company; its current
-  public surface is a marketing site with no published developer or API program.
+description: OwnLocal is an Austin, Texas based automated digital advertising platform for local media
+  companies, founded in 2010 by Lloyd Armbrust and Jason Novek. It helps newspapers, local publishers and
+  media companies power their digital services by automatically converting traditional print advertisements
+  into online marketing campaigns — its AdForge and Origami products turn a submitted print ad PDF into a
+  responsive digital ad unit, a business directory listing and an SEO/search presence, extending advertiser
+  reach across search, social and display channels. OwnLocal publishes a partner-facing REST API (the
+  OwnLocal API, v1) documented with Slate at api.docs.ownlocal.com and backed by a live Swagger 2.0
+  definition served from its own Swagger UI, covering ads, businesses, categories and performance reporting.
+  API keys are issued by OwnLocal support rather than self-serve. OwnLocal was a 500 Global portfolio
+  company and has acquired Whoosh Traffic, Sidengo, Inbound Press and Wanderful Media.
 url: https://raw.githubusercontent.com/api-evangelist/ownlocal/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -14,18 +19,20 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 accessModel:
   pricing: unknown
-  onboarding: unknown
+  onboarding: contact-sales
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
+  label: Partner / contact required
+  confidence: medium
+  source:
+  - authentication
+  - plans
+  generated: '2026-08-12'
   method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-12'
 image: https://ucarecdn.com/0f20cb5b-5f4e-4207-be36-a5ee95dd54b5/ogimage1800optimized.png
 tags:
 - Company
@@ -35,7 +42,66 @@ tags:
 - Marketing
 - Newspapers
 - AdTech
-apis: []
+- Print to Digital
+- Business Listings
+- Local Business Data
+- Ad Reporting
+- Publishers
+apis:
+- name: OwnLocal API
+  description: >-
+    Partner-facing REST API (v1) for OwnLocal's automated print-to-digital advertising platform. Publishers
+    and their systems create and list ads, upload the source print-ad PDF for conversion, create and update
+    the local business (advertiser) records those ads belong to, attach logos and imagery, read the OwnLocal
+    category vocabulary, and pull performance reports covering impressions, interaction breakdowns, leads,
+    digital lift and search-rank history. Authenticated with an organization API key sent raw in the
+    Authorization header; keys are issued by OwnLocal support, not self-serve.
+  humanURL: https://api.docs.ownlocal.com/
+  baseURL: https://admin.austin.ownlocal.com
+  tags:
+  - Advertising
+  - Digital Advertising
+  - Local Media
+  - Business Listings
+  - Ad Reporting
+  - AdTech
+  properties:
+  - type: Documentation
+    url: https://api.docs.ownlocal.com/
+  - type: APIReference
+    url: https://api.docs.ownlocal.com/
+  - type: Swagger
+    url: https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
+  - type: OpenAPI
+    url: openapi/ownlocal-ads-openapi.yml
+  - type: OpenAPI
+    url: openapi/ownlocal-businesses-openapi.yml
+  - type: OpenAPI
+    url: openapi/ownlocal-categories-openapi.yml
+  - type: OpenAPI
+    url: openapi/ownlocal-reports-data-api-openapi.yml
+  - type: Overlay
+    url: overlays/ownlocal-ads-overlay.yaml
+  - type: Overlay
+    url: overlays/ownlocal-businesses-overlay.yaml
+  - type: Overlay
+    url: overlays/ownlocal-categories-overlay.yaml
+  - type: Overlay
+    url: overlays/ownlocal-reports-data-api-overlay.yaml
+  - type: Authentication
+    url: authentication/ownlocal-authentication.yml
+  - type: Conventions
+    url: conventions/ownlocal-conventions.yml
+  - type: DataModel
+    url: data-model/ownlocal-data-model.yml
+  - type: ErrorCatalog
+    url: errors/ownlocal-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/ownlocal-rate-limits.yml
+  - type: MCPServer
+    url: mcp/ownlocal-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/ownlocal-tool-crosswalk.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -44,14 +110,47 @@ maintainers:
 common:
 - type: Website
   url: https://ownlocal.com
+- type: Documentation
+  url: https://api.docs.ownlocal.com/
+- type: APIReference
+  url: https://api.docs.ownlocal.com/
 - type: Support
-  url: https://www.ownlocal.com/contact
+  url: https://www.ownlocal.com/support/
+- type: HelpCenter
+  url: https://www.ownlocal.com/support/
 - type: GitHubOrganization
-  url: https://github.com/ownlocal
+  url: https://github.com/OwnLocal
+- type: PrivacyPolicy
+  url: https://www.ownlocal.com/privacy-policy/
+- type: StatusPage
+  url: https://status.ownlocal.com/
+- type: Authentication
+  url: authentication/ownlocal-authentication.yml
+- type: Conventions
+  url: conventions/ownlocal-conventions.yml
+- type: DataModel
+  url: data-model/ownlocal-data-model.yml
+- type: ErrorCatalog
+  url: errors/ownlocal-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/ownlocal-lifecycle.yml
+- type: Conformance
+  url: conformance/ownlocal-conformance.yml
+- type: RateLimits
+  url: rate-limits/ownlocal-rate-limits.yml
+- type: Plans
+  url: plans/ownlocal-plans-pricing.yml
+- type: Packages
+  url: packages/ownlocal-packages.yml
+- type: LLMsTxt
+  url: llms/ownlocal-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
 - type: DomainSecurity
   url: security/ownlocal-domain-security.yml
 x-enrichment:
-  date: '2026-07-20'
-  status: minimal
-  artifacts_added: 1
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 26
   pass: local-v1
+

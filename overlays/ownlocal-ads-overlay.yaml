@@ -1,0 +1,84 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — OwnLocal API — Ads
+  version: 1.0.0
+extends: ../openapi/ownlocal-ads-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: openapi/_original/ownlocal-swagger.json (verbatim from https://admin.austin.ownlocal.com/api-docs/v1/swagger.json)
+  cross-read against https://api.docs.ownlocal.com/
+x-note: 'Records what API Evangelist added on top of OwnLocal''s own contract during the Swagger 2.0 -> OpenAPI
+  3.1.0 conversion. Nothing here changes OwnLocal''s described behaviour: every added value is either a restatement
+  of something OwnLocal publishes in prose (the server host, the auth mechanics, support contact) or a structural
+  identifier the source omitted (operationIds, tag declarations). No endpoint, parameter, field or schema is invented.
+  The original is preserved byte-for-byte at openapi/_original/ownlocal-swagger.json and is never mutated.'
+actions:
+- target: $
+  description: Add servers[]. OwnLocal's published Swagger 2.0 declares no host, basePath or schemes, so the source
+    contract never names the server it describes. The host is taken verbatim from the published API reference
+    at https://api.docs.ownlocal.com/, where every curl example calls https://admin.austin.ownlocal.com/api/v1/...
+  update:
+    servers:
+    - url: https://admin.austin.ownlocal.com
+      description: OwnLocal production API host (per the published API reference)
+- target: $
+  description: Link the machine contract back to the human reference it was cross-read against.
+  update:
+    externalDocs:
+      description: OwnLocal API Docs
+      url: https://api.docs.ownlocal.com/
+- target: $.info
+  description: Add contact (support@ownlocal.com / the support page, both published by OwnLocal) and a tag-scoped
+    description. The source info block carries only title and version.
+  update:
+    description: Print ads converted into digital ad units — create, list, retrieve, update and upload the source
+      PDF for an ad.
+    contact:
+      name: OwnLocal Support
+      email: support@ownlocal.com
+      url: https://www.ownlocal.com/support/
+- target: $
+  description: Declare the tag. The source Swagger uses tags on operations but never declares them at the root,
+    so no tag carries a description.
+  update:
+    tags:
+    - name: Ads
+      description: Print ads converted into digital ad units — create, list, retrieve, update and upload the source
+        PDF for an ad.
+- target: $.paths['/api/v1/ads'].post
+  description: Add operationId 'createAd'. None of OwnLocal's 13 operations declares an operationId, which blocks
+    code generation and leaves agent tooling with no stable handle. Assigned deterministically from the HTTP method
+    and resource path.
+  update:
+    operationId: createAd
+- target: $.paths['/api/v1/ads'].get
+  description: Add operationId 'listAds'. None of OwnLocal's 13 operations declares an operationId, which blocks
+    code generation and leaves agent tooling with no stable handle. Assigned deterministically from the HTTP method
+    and resource path.
+  update:
+    operationId: listAds
+- target: $.paths['/api/v1/ads/{adUuid}'].get
+  description: Add operationId 'getAd'. None of OwnLocal's 13 operations declares an operationId, which blocks
+    code generation and leaves agent tooling with no stable handle. Assigned deterministically from the HTTP method
+    and resource path.
+  update:
+    operationId: getAd
+- target: $.paths['/api/v1/ads/{adUuid}'].patch
+  description: Add operationId 'updateAd'. None of OwnLocal's 13 operations declares an operationId, which blocks
+    code generation and leaves agent tooling with no stable handle. Assigned deterministically from the HTTP method
+    and resource path.
+  update:
+    operationId: updateAd
+- target: $.paths['/api/v1/ads/{adUuid}/content'].post
+  description: Add operationId 'uploadAdContent'. None of OwnLocal's 13 operations declares an operationId, which
+    blocks code generation and leaves agent tooling with no stable handle. Assigned deterministically from the
+    HTTP method and resource path.
+  update:
+    operationId: uploadAdContent
+- target: $.components.securitySchemes.apiKey
+  description: 'Describe the apiKey scheme. The source declares type/name/in with no description, which omits
+    the single most error-prone fact about this API: the key is sent RAW in the Authorization header with no Bearer
+    prefix, and is issued manually by OwnLocal support. Stated in the published reference.'
+  update:
+    description: Organization API key sent raw (no scheme prefix) in the Authorization header. Keys are issued
+      by OwnLocal support; there is no self-serve key provisioning.

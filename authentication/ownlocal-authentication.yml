@@ -1,0 +1,21 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/ownlocal-ads-openapi.yml, openapi/ownlocal-businesses-openapi.yml, openapi/ownlocal-categories-openapi.yml,
+  openapi/ownlocal-reports-data-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Organization API key sent raw (no scheme prefix) in the Authorization header.
+    Keys are issued by OwnLocal support; there is no self-serve key provisioning.
+  sources:
+  - openapi/ownlocal-ads-openapi.yml
+  - openapi/ownlocal-businesses-openapi.yml
+  - openapi/ownlocal-categories-openapi.yml
+  - openapi/ownlocal-reports-data-api-openapi.yml

@@ -1,0 +1,56 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://api.docs.ownlocal.com/ (full Slate reference, including the Errors table),
+  https://admin.austin.ownlocal.com/api-docs/v1/swagger.json, https://www.ownlocal.com/support/
+api: OwnLocal API v1
+limit_count: 0
+enforced: true
+published: false
+note: >-
+  An honest zero. OwnLocal's reference confirms a rate limit is ENFORCED — 429 "Too Many Requests -- You're
+  requesting too many resources! Slow down!" appears in the published error table — but no numeric limit,
+  window, scope, burst allowance, or response header is documented anywhere, and none is declared on any of
+  the 13 operations in the Swagger definition. The limit exists and is invisible.
+
+limits: []
+
+response_headers:
+  documented: []
+  ratelimit_standard: false
+  x_ratelimit: false
+  retry_after: false
+  detail: >-
+    No RateLimit-Limit / RateLimit-Remaining / RateLimit-Reset (RFC-draft style), no X-RateLimit-* (legacy
+    style), and no Retry-After. A client has no way to see how much budget it has left, and on a 429 has no
+    server-supplied wait hint.
+
+exhaustion:
+  status_code: 429
+  body: undocumented
+  media_type: application/json
+  retry_after_header: false
+  documented_backoff: null
+  detail: >-
+    429 is documented only as a row in the reference error table. It is not declared on any operation in the
+    machine contract, so an agent generating a client from the spec alone will not even know 429 is possible.
+
+probe:
+  attempted: false
+  reason: >-
+    Every operation requires an organization API key issued by OwnLocal support, so limits cannot be observed
+    on a live unauthenticated response without credentials this profile does not hold and would not use.
+    Recorded as unmeasured rather than guessed.
+
+pagination_as_implicit_limit:
+  detail: >-
+    The only quantitative ceilings published anywhere are the default page sizes — 20 on listAds, 30 on
+    listBusinesses, 25 on listCategories. No maximum `size` value is documented, so a client cannot know how
+    large a page it is allowed to request.
+  see: conventions/ownlocal-conventions.yml
+
+agent_impact: >-
+  With an enforced-but-unpublished limit and no runtime signal, an autonomous consumer can only implement
+  blind exponential backoff on 429 and cannot pace itself in advance. This is the single cheapest fix
+  available to OwnLocal: publishing the numbers, or emitting RateLimit-* headers, would move the API from
+  unpredictable to schedulable without any change to its surface.

@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: OwnLocal API — Categories
+  version: v1
+  description: The OwnLocal business category and sub-category vocabulary used to classify businesses and filter
+    ads.
+  contact:
+    name: OwnLocal Support
+    email: support@ownlocal.com
+    url: https://www.ownlocal.com/support/
+servers:
+- url: https://admin.austin.ownlocal.com
+  description: OwnLocal production API host (per the published API reference)
+externalDocs:
+  description: OwnLocal API Docs
+  url: https://api.docs.ownlocal.com/
+tags:
+- name: Categories
+  description: The OwnLocal business category and sub-category vocabulary used to classify businesses and filter
+    ads.
+paths:
+  /api/v1/categories:
+    get:
+      tags:
+      - Categories
+      summary: Retrieve a list of categories
+      operationId: listCategories
+      parameters:
+      - name: sortedBy
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdAt,updatedAt,startDate,endDate
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 2
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 20
+      responses:
+        '200':
+          description: categories found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/category'
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Organization API key sent raw (no scheme prefix) in the Authorization header. Keys are issued
+        by OwnLocal support; there is no self-serve key provisioning.
+  schemas:
+    category:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Communication
+        subCategories:
+          type: array
+          items:
+            type: string
+          example:
+          - Broadcasting Services
+          - Cable TV
+          - Newspapers and Magazines
+          - Other
+          - Publishing
+          - Radio Stations
+          - Telecommunications
+          - TV Stations
+security:
+- apiKey: []

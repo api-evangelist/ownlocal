@@ -1,0 +1,231 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/ownlocal-*-openapi.yml (derived from the published Swagger 2.0 at
+  https://admin.austin.ownlocal.com/api-docs/v1/swagger.json), cross-read against the published reference at
+  https://api.docs.ownlocal.com/
+docs: https://api.docs.ownlocal.com/
+api: OwnLocal API v1
+base_url: https://admin.austin.ownlocal.com
+note: >-
+  Cross-cutting runtime semantics for the OwnLocal API. Everything below is either declared in OwnLocal's own
+  contract or stated in its own reference; where a convention is ABSENT that absence is recorded as `false`
+  with a note, because an agent needs to know which runtime signals it will not get.
+
+authentication:
+  style: api-key-header
+  header: Authorization
+  scheme_prefix: none
+  detail: >-
+    The organization API key is sent raw in the Authorization header — `Authorization: <token>` — with no
+    `Bearer` or `ApiKey` prefix. This is unusual and a common integration failure; a client that defaults to
+    `Bearer` will 401.
+  provisioning: manual
+  provisioning_detail: "\"Contact our support team to get your API key.\" There is no self-serve key issuance."
+  oauth2: false
+  scoping: per-organization
+  see: authentication/ownlocal-authentication.yml
+
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  detail: >-
+    No idempotency key of any kind is documented or declared. createAd and createBusiness are plain POSTs
+    with no dedupe token, so a retried create after a timeout produces a duplicate record. There is also no
+    DELETE anywhere in the API, so a duplicate cannot be cleaned up through the API — only through OwnLocal
+    support. Clients must dedupe on their own side.
+  mitigation: >-
+    Both create bodies accept a caller-supplied `adCustomId` / `custom_id`, which is the only field available
+    for correlating a local record to an OwnLocal record after a retry. It is not enforced unique by the API
+    and is NOT an idempotency key, but it is the only handle a client has for reconciliation.
+  note: >-
+    No `type: Idempotency` pointer is emitted in apis.yml. The provider does not support it, and asserting it
+    would credit OwnLocal with a guarantee it does not make.
+
+pagination:
+  style: page-number
+  supported: true
+  parameters:
+  - name: page
+    in: query
+    type: integer
+    default: 1
+    description: The page to retrieve, based on `size`.
+  - name: size
+    in: query
+    type: integer
+    description: Response size, in records.
+    defaults:
+      listAds: 20
+      listBusinesses: 30
+      listCategories: 25
+  applies_to:
+  - listAds
+  - listBusinesses
+  - listCategories
+  not_applies_to:
+  - getAdsReport
+  - getBusinessReport
+  response_envelope: none
+  response_fields: []
+  total_count: false
+  next_link: false
+  detail: >-
+    List responses are BARE JSON ARRAYS. There is no envelope, no `total`, no `page_count`, and no `next`
+    link — so a client cannot tell whether it is on the last page except by requesting the next one and
+    receiving fewer than `size` records, or an empty array. The default page size differs per collection
+    (20 / 30 / 25), which is inconsistent and easy to get wrong.
+  max_size: undocumented
+
+sorting:
+  supported: true
+  parameter: sortedBy
+  applies_to:
+  - listAds
+  - listBusinesses
+  - listCategories
+  documented_values:
+  - createdAt
+  - updatedAt
+  - startDate
+  - endDate
+  direction_control: undocumented
+  detail: >-
+    `sortedBy` is declared as a plain string with an example of "createdAt,updatedAt,startDate,endDate". It is
+    not an enum in the spec and no ascending/descending syntax is documented. The same example value is
+    repeated on listCategories, where those fields are not obviously meaningful.
+
+filtering:
+  style: query-parameter-ranges
+  detail: >-
+    List operations expose paired min/max date range filters and comma-separated id/category filters. This is
+    the richest and best-specified part of the API.
+  patterns:
+  - pattern: "<field>Min / <field>Max"
+    fields:
+    - startDate
+    - endDate
+    - dateModified
+    - dateCreated
+    - offerCount
+    applies_to:
+    - listAds
+    partial_on:
+    - listBusinesses
+  - pattern: comma-separated id list
+    parameters:
+    - businessUuids
+    - publisherUuids
+  - pattern: category vocabulary
+    parameters:
+    - categories
+    - subCategories
+    vocabulary_source: listCategories
+  type_caveat: >-
+    Date range parameters are declared `format: date` but the spec's own examples are full date-times
+    ("2019-09-01T12:34:00"), while the reference documents them as plain dates. The contract and the
+    documentation disagree on the accepted format.
+
+field_expansion:
+  supported: false
+  detail: No expand / include / fields / sparse-fieldset parameter exists. Responses are fixed shape.
+
+metadata:
+  supported: partial
+  fields:
+  - name: adCustomId
+    on: ad
+    description: Caller-supplied external id for an ad.
+  - name: custom_id
+    on: business
+    description: Caller-supplied external id for a business.
+  detail: >-
+    A single free-text external-id field per resource. There is no general key/value metadata object.
+
+request_id_tracing:
+  supported: false
+  request_header: null
+  response_header: null
+  detail: >-
+    No correlation or request-id header is documented or declared, on request or response. When a call fails
+    there is no identifier to give OwnLocal support beyond the timestamp and the resource UUID.
+
+versioning:
+  style: uri-path
+  current: v1
+  detail: >-
+    The version is pinned in the path (`/api/v1/...`) and mirrored in the Swagger UI config, which advertises
+    a single definition named "API V1 Docs". No version header, no date-based versioning, no `Accept`
+    negotiation. Only one version has ever been published.
+  see: lifecycle/ownlocal-lifecycle.yml
+
+error_envelope:
+  style: http-status-only
+  rfc9457: false
+  media_type: application/json
+  detail: >-
+    Failures are signalled by status code. Only the three upload operations declare a typed error body
+    (`unacceptableContent`); everything else returns a described-but-unschema'd response.
+  see: errors/ownlocal-problem-types.yml
+
+rate_limit_signaling:
+  supported: false
+  response_headers: []
+  exhaustion_status: '429'
+  retry_after: false
+  detail: >-
+    429 is listed in the reference error table, so a limit exists and is enforced, but no numeric limit,
+    window, or response header is published — no RateLimit-*, no X-RateLimit-*, no Retry-After. A client
+    cannot see how close it is to the limit and can only respond to 429 with blind backoff.
+  see: rate-limits/ownlocal-rate-limits.yml
+
+media_types:
+  request:
+  - application/json
+  - multipart/form-data
+  response:
+  - application/json
+  detail: >-
+    JSON for CRUD; multipart/form-data on the three binary uploads (uploadAdContent, uploadBusinessImage,
+    uploadBusinessLogo), each of which takes a `file` part plus a redundant `fileName` string part.
+
+asynchrony:
+  style: accepted-then-poll
+  detail: >-
+    The three upload operations return 202 Accepted — the PDF-to-digital conversion is asynchronous. No
+    callback, webhook, or job-status resource is published, so there is NO documented way to learn when
+    conversion finished or whether it succeeded. A client must poll getAd and watch for the derived fields
+    (`image`, `adText`, `offers`) to populate.
+  webhooks: false
+  callbacks: false
+  job_status_endpoint: false
+  see: lifecycle/ownlocal-lifecycle.yml
+
+identifiers:
+  style: uuid
+  detail: >-
+    Every primary identifier is an unprefixed UUID v4 (adUuid, businessUuid, publisherUuid, offerUuid). There
+    are no type prefixes, so an id alone does not tell an agent what kind of object it points at.
+  exception: >-
+    Category sub-categories are keyed by small integers (e.g. 102, 103) and are referenced from a business as
+    `primary_sub_cat_id`.
+
+naming:
+  case_inconsistency: true
+  detail: >-
+    The API mixes camelCase and snake_case across surfaces. The Ads/Businesses/Categories resources use
+    camelCase (`adUuid`, `businessUuid`, `dateCreatedMin`, `sortedBy`), while the Reports operations use
+    snake_case for both parameters and response fields (`publisher_id`, `business_id`, `start_date`,
+    `total_views`). The prose reference documents the CRUD parameters in snake_case (`business_ids`,
+    `date_created_min`) where the machine contract declares camelCase (`businessUuids`, `dateCreatedMin`).
+    Trust the OpenAPI over the prose for the CRUD resources; the two genuinely disagree.
+
+cross_links:
+  errors: errors/ownlocal-problem-types.yml
+  lifecycle: lifecycle/ownlocal-lifecycle.yml
+  authentication: authentication/ownlocal-authentication.yml
+  rate_limits: rate-limits/ownlocal-rate-limits.yml
+  data_model: data-model/ownlocal-data-model.yml
+  conformance: conformance/ownlocal-conformance.yml

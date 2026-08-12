@@ -1,0 +1,150 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  mcp/ownlocal-mcp.yml (candidate tool set) bound to openapi/ownlocal-*-openapi.yml operationIds, both
+  derived from OwnLocal's published Swagger 2.0 at https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
+api: OwnLocal API v1
+
+note: >-
+  A one-to-one crosswalk. OwnLocal ships NO MCP server and NO GraphQL endpoint, so there is no live tool
+  surface to reconcile against REST — the tool column here is the candidate set in mcp/ownlocal-mcp.yml,
+  derived from the same OpenAPI. Confidence is `high` on every row for exactly that reason: each tool IS one
+  REST operation, and every tool inherits that operation's parameters and requestBody verbatim as its real
+  input schema. There are no MCP-only capabilities and no REST operations left unmapped. This file exists so
+  that if OwnLocal ever publishes a server, the divergence between it and the REST contract is measurable
+  against a recorded baseline.
+
+surfaces:
+  openapi:
+    published: true
+    source: https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
+    format: Swagger 2.0
+    refined:
+    - openapi/ownlocal-ads-openapi.yml
+    - openapi/ownlocal-businesses-openapi.yml
+    - openapi/ownlocal-categories-openapi.yml
+    - openapi/ownlocal-reports-data-api-openapi.yml
+    gated: false
+    note: The definition is served anonymously; only the API calls it describes require a key.
+  graphql:
+    published: false
+    endpoint: null
+  mcp:
+    published: false
+    url: null
+    gated: null
+    note: No hosted or remote MCP server exists. The tool column is candidate, not live.
+
+crosswalk:
+- tool: list_ads
+  category: read
+  rest:
+  - listAds
+  binding: one-to-one
+  confidence: high
+  note: Inherits 17 query parameters (category/date-range/id filters, sortedBy, page, size).
+- tool: get_ad
+  category: read
+  rest:
+  - getAd
+  binding: one-to-one
+  confidence: high
+- tool: create_ad
+  category: write
+  rest:
+  - createAd
+  binding: one-to-one
+  confidence: high
+  note: >-
+    Step 1 of a 2-step flow — the 201 returns a content_url that must then be POSTed to via upload_ad_content.
+    A composite `submit_print_ad` tool would be the natural MCP shape, and would be the one place a real
+    server should diverge from REST.
+- tool: update_ad
+  category: write
+  rest:
+  - updateAd
+  binding: one-to-one
+  confidence: high
+- tool: upload_ad_content
+  category: write
+  rest:
+  - uploadAdContent
+  binding: one-to-one
+  confidence: high
+  note: multipart/form-data with a binary `file` part; returns 202 with no completion callback.
+- tool: list_businesses
+  category: read
+  rest:
+  - listBusinesses
+  binding: one-to-one
+  confidence: high
+- tool: get_business
+  category: read
+  rest:
+  - getBusiness
+  binding: one-to-one
+  confidence: high
+- tool: create_business
+  category: write
+  rest:
+  - createBusiness
+  binding: one-to-one
+  confidence: high
+- tool: upload_business_logo
+  category: write
+  rest:
+  - uploadBusinessLogo
+  binding: one-to-one
+  confidence: high
+- tool: upload_business_image
+  category: write
+  rest:
+  - uploadBusinessImage
+  binding: one-to-one
+  confidence: high
+- tool: list_categories
+  category: read
+  rest:
+  - listCategories
+  binding: one-to-one
+  confidence: high
+- tool: get_ads_report
+  category: read
+  rest:
+  - getAdsReport
+  binding: one-to-one
+  confidence: high
+- tool: get_business_report
+  category: read
+  rest:
+  - getBusinessReport
+  binding: one-to-one
+  confidence: high
+
+mcp_only: []
+
+rest_only: []
+
+graphql_only: []
+
+unmapped_capabilities:
+- capability: publisher listing
+  present_in: neither
+  detail: >-
+    Publisher is the tenancy root of the whole model — referenced by ad, business and both reports — and no
+    REST operation or candidate tool exposes it. This is missing from the API itself, not a crosswalk gap.
+  see: data-model/ownlocal-data-model.yml
+- capability: delete
+  present_in: neither
+  detail: No DELETE exists on any resource, so neither surface can undo a create.
+
+coverage:
+  rest_operations: 13
+  tools: 13
+  mapped: 13
+  mcp_only: 0
+  rest_only: 0
+  graphql_only: 0
+  rest_coverage_pct: 100
+  tool_coverage_pct: 100
+  live_mcp_verified: false
