@@ -1,0 +1,310 @@
+{
+  "item": [
+    {
+      "id": "d7f725e5-a736-4d23-8233-9c0be79e9d19",
+      "name": "Reports Data API",
+      "description": {
+        "content": "Performance reporting for ads and businesses — impressions, interaction breakdowns, leads, digital lift and search-rank history.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "733987df-7630-4241-9953-f363a5f75121",
+          "name": "Builds and returns an ads report",
+          "request": {
+            "name": "Builds and returns an ads report",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "reports",
+                "ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "publisher_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3567e6c7-a527-40cb-8277-5a88eb04a5a8",
+              "name": "result ads report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "reports",
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "publisher_id",
+                      "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2020-02-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2020-02-02"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"start_date\": \"2020-06-01\",\n  \"end_date\": \"2020-07-01\",\n  \"publisher_name\": \"The Pub News\",\n  \"publisher_id\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"ads\": [\n    {\n      \"uuid\": \"87415afa-ac85-4f55-b869-c63532d02ffe\",\n      \"start_date\": \"2020-06-24\",\n      \"end_date\": \"2020-06-25\",\n      \"data\": {\n        \"online_impressions\": {\n          \"overall\": 11346\n        },\n        \"interaction_breakdown\": {\n          \"breakdowns\": {\n            \"overall\": {\n              \"total_clicks\": 9,\n              \"about_us_clicks\": 0,\n              \"contact_clicks\": 0,\n              \"expand_ad_unit_clicks\": 9,\n              \"print_ad_clicks\": 0,\n              \"website_clicks\": 0,\n              \"facebook_clicks\": 0,\n              \"twitter_clicks\": 0,\n              \"instagram_clicks\": 0,\n              \"yelp_clicks\": 0,\n              \"call_clicks\": 0,\n              \"directions_clicks\": 0,\n              \"contact_form_submits\": 0,\n              \"share\": 0\n            }\n          }\n        }\n      }\n    },\n    {\n      \"uuid\": \"a3c6f485-07b1-4241-9bc7-9945be77d0a5\",\n      \"data\": {\n        \"online_impressions\": {\n          \"overall\": 11410\n        },\n        \"interaction_breakdown\": {\n          \"breakdowns\": {\n            \"overall\": {\n              \"total_clicks\": 4,\n              \"about_us_clicks\": 0,\n              \"contact_clicks\": 0,\n              \"expand_ad_unit_clicks\": 4,\n              \"print_ad_clicks\": 0,\n              \"website_clicks\": 0,\n              \"facebook_clicks\": 0,\n              \"twitter_clicks\": 0,\n              \"instagram_clicks\": 0,\n              \"yelp_clicks\": 0,\n              \"call_clicks\": 0,\n              \"directions_clicks\": 0,\n              \"contact_form_submits\": 0,\n              \"share\": 0\n            }\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae53c26b-c2d8-4159-877c-45a492a0f011",
+          "name": "Builds and returns a business report",
+          "request": {
+            "name": "Builds and returns a business report",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "reports",
+                "business"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "publisher_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "business_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed441269-92ae-4914-a409-029ab721e95f",
+              "name": "result business report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "reports",
+                    "business"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "publisher_id",
+                      "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1"
+                    },
+                    {
+                      "key": "business_id",
+                      "value": "d69b6855-7e24-47e1-96a0-11c55ca0e9a7"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2020-02-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2020-02-02"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"start_date\": \"2020-06-01\",\n  \"end_date\": \"2020-07-01\",\n  \"business_name\": \"My Local Business\",\n  \"business_id\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"reach_report\": {\n    \"print_distribution\": 0,\n    \"online_impressions\": {\n      \"overall\": 277160\n    },\n    \"total_ads\": 13,\n    \"directory\": {\n      \"days\": 31,\n      \"impressions\": 0\n    },\n    \"origami\": {\n      \"ads\": 9,\n      \"days\": 10,\n      \"impressions\": {\n        \"overall\": 277160\n      }\n    },\n    \"interaction_breakdown\": {\n      \"breakdowns\": {\n        \"overall\": {\n          \"total_clicks\": 209,\n          \"about_us_clicks\": 1,\n          \"contact_clicks\": 0,\n          \"expand_ad_unit_clicks\": 181,\n          \"print_ad_clicks\": 0,\n          \"website_clicks\": 19,\n          \"facebook_clicks\": 0,\n          \"twitter_clicks\": 0,\n          \"instagram_clicks\": 0,\n          \"yelp_clicks\": 0,\n          \"call_clicks\": 1,\n          \"directions_clicks\": 7,\n          \"contact_form_submits\": 0,\n          \"share\": 0\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://admin.austin.ownlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e8ff374-4692-4b09-9d03-9ff9bc20fe0e",
+    "name": "OwnLocal API — Reports Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Performance reporting for ads and businesses — impressions, interaction breakdowns, leads, digital lift and search-rank history.\n\nContact Support:\n Name: OwnLocal Support\n Email: support@ownlocal.com",
+      "type": "text/plain"
+    }
+  }
+}

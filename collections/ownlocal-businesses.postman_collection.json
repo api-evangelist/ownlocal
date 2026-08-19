@@ -1,0 +1,1033 @@
+{
+  "item": [
+    {
+      "id": "bd227a6d-25bc-452a-aaef-ec7872735b39",
+      "name": "Businesses",
+      "description": {
+        "content": "Local business (advertiser) records — create, list, retrieve, and attach logo/imagery.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11213e7d-1a7f-47ee-87eb-3298d747ba14",
+          "name": "Retrieve a list of businesses",
+          "request": {
+            "name": "Retrieve a list of businesses",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "businesses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "subCategories",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedMin",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedMax",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateCreatedMin",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateCreatedMax",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "publisherUuids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "publisherUuids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortedBy",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f0973755-7d4e-43ea-994e-513a5e8d9f13",
+              "name": "businesses found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "foodAndBeverage"
+                    },
+                    {
+                      "key": "subCategories",
+                      "value": "mexicanFood,restaurants"
+                    },
+                    {
+                      "key": "dateModifiedMin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateModifiedMax",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateCreatedMin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateCreatedMax",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "publisherUuids",
+                      "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1"
+                    },
+                    {
+                      "key": "publisherUuids",
+                      "value": "d69b6855-7e24-47e1-96a0-11c55ca0e9a7"
+                    },
+                    {
+                      "key": "sortedBy",
+                      "value": "createdAt,updatedAt,startDate,endDate"
+                    },
+                    {
+                      "key": "page",
+                      "value": "2"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"businessUuid\": \"69271d95-e891-4bf7-a9ba-ce249e36e236\",\n    \"businessCustomId\": \"23456\",\n    \"publisherUuids\": [\n      \"e94df8d7-cc45-4ec9-b9fa-e42f04f74c38\",\n      \"9103093d-596a-4ed4-a0ea-d7a5bfc35912\"\n    ],\n    \"name\": \"Cielo Azul Mexican Grill\",\n    \"logoUrl\": \"http://www.cielobluemexreservations.com/CieloBlueMexicanGrill_logo.jpg\",\n    \"website\": \"http://www.cielobluecantina.com\",\n    \"urls\": [\n      {\n        \"url\": \"http://www.ciellobluemexreservations.com\",\n        \"laber\": \"Reservations\"\n      },\n      {\n        \"url\": \"http://www.ciellobluemexreservations.com\",\n        \"laber\": \"Reservations\"\n      }\n    ],\n    \"description\": \"We provide our customers with a fun and happy environment along with our enthusiastic staff, always making sure our customers have the greatest time in our restaurants. We try to make everyone of our customers feel welcome, and to make them have a great experience with us.\",\n    \"email\": \"generalmgr@cielobluecantina.com\",\n    \"openingHours\": \"Mo,Tu,We,Th,Fr 09:00-12:00\",\n    \"hoursGeneralDescription\": \"Open 6 days a week, Tuesday to Sunday\",\n    \"conditionsOfAccess\": \"reservations accepted\",\n    \"locations\": [\n      {\n        \"streetAddress\": 4810,\n        \"addressLocality\": \"Oshawa\",\n        \"addressRegion\": \"ON\",\n        \"postalCode\": \"L1H 3M3\",\n        \"telephones\": [\n          \"905-720-2326\"\n        ]\n      },\n      {\n        \"streetAddress\": 2415,\n        \"addressLocality\": \"Oshawa\",\n        \"addressRegion\": \"ON\",\n        \"postalCode\": \"L1H 3M3\",\n        \"telephones\": [\n          \"905-720-2326\"\n        ]\n      }\n    ],\n    \"categories\": [\n      \"Food and Beverage\",\n      \"Food and Beverage\"\n    ],\n    \"subCategories\": [\n      \"Mexican Food\",\n      \"Mexican Food\"\n    ],\n    \"social\": {\n      \"facebookUrl\": \"https://www.facebook.com/CieloBlueBelmont/\",\n      \"instagramUrl\": \"https://www.instagram.com/CieloBlueBelmont/\",\n      \"twitterUrl\": \"https://www.twitter.com/CieloBlueBelmont/\",\n      \"youtubeUrl\": \"https://www.youtube.com/CieloBlueBelmont/\",\n      \"yelpUrl\": \"https://www.yelp.com/biz/Cielo-Blue-Belmont\"\n    },\n    \"acceptedPaymentMethods\": [\n      \"MasterCard\",\n      \"Cash\"\n    ],\n    \"images\": [\n      \"https://assets.ownlocal.com/images/a78feabb-df16-4fde-87aa-fba233d71671.jpeg\",\n      \"https://assets.ownlocal.com/images/bbfe0e1f-0d8a-40df-86bd-c6a2250c09ec.jpeg\"\n    ]\n  },\n  {\n    \"businessUuid\": \"69271d95-e891-4bf7-a9ba-ce249e36e236\",\n    \"businessCustomId\": \"23456\",\n    \"publisherUuids\": [\n      \"e94df8d7-cc45-4ec9-b9fa-e42f04f74c38\",\n      \"9103093d-596a-4ed4-a0ea-d7a5bfc35912\"\n    ],\n    \"name\": \"Cielo Azul Mexican Grill\",\n    \"logoUrl\": \"http://www.cielobluemexreservations.com/CieloBlueMexicanGrill_logo.jpg\",\n    \"website\": \"http://www.cielobluecantina.com\",\n    \"urls\": [\n      {\n        \"url\": \"http://www.ciellobluemexreservations.com\",\n        \"laber\": \"Reservations\"\n      },\n      {\n        \"url\": \"http://www.ciellobluemexreservations.com\",\n        \"laber\": \"Reservations\"\n      }\n    ],\n    \"description\": \"We provide our customers with a fun and happy environment along with our enthusiastic staff, always making sure our customers have the greatest time in our restaurants. We try to make everyone of our customers feel welcome, and to make them have a great experience with us.\",\n    \"email\": \"generalmgr@cielobluecantina.com\",\n    \"openingHours\": \"Mo,Tu,We,Th,Fr 09:00-12:00\",\n    \"hoursGeneralDescription\": \"Open 6 days a week, Tuesday to Sunday\",\n    \"conditionsOfAccess\": \"reservations accepted\",\n    \"locations\": [\n      {\n        \"streetAddress\": 74,\n        \"addressLocality\": \"Oshawa\",\n        \"addressRegion\": \"ON\",\n        \"postalCode\": \"L1H 3M3\",\n        \"telephones\": [\n          \"905-720-2326\"\n        ]\n      },\n      {\n        \"streetAddress\": 9692,\n        \"addressLocality\": \"Oshawa\",\n        \"addressRegion\": \"ON\",\n        \"postalCode\": \"L1H 3M3\",\n        \"telephones\": [\n          \"905-720-2326\"\n        ]\n      }\n    ],\n    \"categories\": [\n      \"Food and Beverage\",\n      \"Food and Beverage\"\n    ],\n    \"subCategories\": [\n      \"Mexican Food\",\n      \"Mexican Food\"\n    ],\n    \"social\": {\n      \"facebookUrl\": \"https://www.facebook.com/CieloBlueBelmont/\",\n      \"instagramUrl\": \"https://www.instagram.com/CieloBlueBelmont/\",\n      \"twitterUrl\": \"https://www.twitter.com/CieloBlueBelmont/\",\n      \"youtubeUrl\": \"https://www.youtube.com/CieloBlueBelmont/\",\n      \"yelpUrl\": \"https://www.yelp.com/biz/Cielo-Blue-Belmont\"\n    },\n    \"acceptedPaymentMethods\": [\n      \"MasterCard\",\n      \"Cash\"\n    ],\n    \"images\": [\n      \"https://assets.ownlocal.com/images/a78feabb-df16-4fde-87aa-fba233d71671.jpeg\",\n      \"https://assets.ownlocal.com/images/bbfe0e1f-0d8a-40df-86bd-c6a2250c09ec.jpeg\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c2f4533-5555-46bb-9681-76ba2efe2d06",
+          "name": "Create a new business",
+          "request": {
+            "name": "Create a new business",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "businesses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"businessUuid\": \"<uuid>\",\n  \"businessCustomId\": \"<string>\",\n  \"publisherUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"website\": \"<string>\",\n  \"urls\": [\n    {\n      \"url\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"email\": \"<string>\",\n  \"openingHours\": \"<string>\",\n  \"hoursGeneralDescription\": \"<string>\",\n  \"conditionsOfAccess\": \"<string>\",\n  \"locations\": [\n    {\n      \"streetAddress\": \"<integer>\",\n      \"addressLocality\": \"<string>\",\n      \"addressRegion\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"telephones\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"streetAddress\": \"<integer>\",\n      \"addressLocality\": \"<string>\",\n      \"addressRegion\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"telephones\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"social\": {\n    \"facebookUrl\": \"<instring>\",\n    \"instagramUrl\": \"<string>\",\n    \"twitterUrl\": \"<string>\",\n    \"youtubeUrl\": \"<string>\",\n    \"yelpUrl\": \"<string>\"\n  },\n  \"acceptedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c882417-0715-4403-b415-f2c8b5d99c15",
+              "name": "Business was successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"businessUuid\": \"69271d95-e891-4bf7-a9ba-ce249e36e236\",\n  \"businessCustomId\": \"23456\",\n  \"publisherUuids\": [\n    \"e94df8d7-cc45-4ec9-b9fa-e42f04f74c38\",\n    \"9103093d-596a-4ed4-a0ea-d7a5bfc35912\"\n  ],\n  \"name\": \"Cielo Azul Mexican Grill\",\n  \"logoUrl\": \"http://www.cielobluemexreservations.com/CieloBlueMexicanGrill_logo.jpg\",\n  \"website\": \"http://www.cielobluecantina.com\",\n  \"urls\": [\n    {\n      \"url\": \"http://www.ciellobluemexreservations.com\",\n      \"laber\": \"Reservations\"\n    },\n    {\n      \"url\": \"http://www.ciellobluemexreservations.com\",\n      \"laber\": \"Reservations\"\n    }\n  ],\n  \"description\": \"We provide our customers with a fun and happy environment along with our enthusiastic staff, always making sure our customers have the greatest time in our restaurants. We try to make everyone of our customers feel welcome, and to make them have a great experience with us.\",\n  \"email\": \"generalmgr@cielobluecantina.com\",\n  \"openingHours\": \"Mo,Tu,We,Th,Fr 09:00-12:00\",\n  \"hoursGeneralDescription\": \"Open 6 days a week, Tuesday to Sunday\",\n  \"conditionsOfAccess\": \"reservations accepted\",\n  \"locations\": [\n    {\n      \"streetAddress\": \"<integer>\",\n      \"addressLocality\": \"Oshawa\",\n      \"addressRegion\": \"ON\",\n      \"postalCode\": \"L1H 3M3\",\n      \"telephones\": [\n        \"905-720-2326\"\n      ]\n    },\n    {\n      \"streetAddress\": \"<integer>\",\n      \"addressLocality\": \"Oshawa\",\n      \"addressRegion\": \"ON\",\n      \"postalCode\": \"L1H 3M3\",\n      \"telephones\": [\n        \"905-720-2326\"\n      ]\n    }\n  ],\n  \"categories\": [\n    \"Food and Beverage\",\n    \"Food and Beverage\"\n  ],\n  \"subCategories\": [\n    \"Mexican Food\",\n    \"Mexican Food\"\n  ],\n  \"social\": {\n    \"facebookUrl\": \"https://www.facebook.com/CieloBlueBelmont/\",\n    \"instagramUrl\": \"https://www.instagram.com/CieloBlueBelmont/\",\n    \"twitterUrl\": \"https://www.twitter.com/CieloBlueBelmont/\",\n    \"youtubeUrl\": \"https://www.youtube.com/CieloBlueBelmont/\",\n    \"yelpUrl\": \"https://www.yelp.com/biz/Cielo-Blue-Belmont\"\n  },\n  \"acceptedPaymentMethods\": [\n    \"MasterCard\",\n    \"Cash\"\n  ],\n  \"images\": [\n    \"https://assets.ownlocal.com/images/a78feabb-df16-4fde-87aa-fba233d71671.jpeg\",\n    \"https://assets.ownlocal.com/images/bbfe0e1f-0d8a-40df-86bd-c6a2250c09ec.jpeg\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"businessUuid\": \"25c4ae81-095e-4229-a56b-cb2f3ae08f1f\",\n  \"status\": \"Created\",\n  \"message\": \"Your business {business name} was successfully created.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45170407-98c0-4ac8-a208-30c5d7c338bc",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"businessUuid\": \"69271d95-e891-4bf7-a9ba-ce249e36e236\",\n  \"businessCustomId\": \"23456\",\n  \"publisherUuids\": [\n    \"e94df8d7-cc45-4ec9-b9fa-e42f04f74c38\",\n    \"9103093d-596a-4ed4-a0ea-d7a5bfc35912\"\n  ],\n  \"name\": \"Cielo Azul Mexican Grill\",\n  \"logoUrl\": \"http://www.cielobluemexreservations.com/CieloBlueMexicanGrill_logo.jpg\",\n  \"website\": \"http://www.cielobluecantina.com\",\n  \"urls\": [\n    {\n      \"url\": \"http://www.ciellobluemexreservations.com\",\n      \"laber\": \"Reservations\"\n    },\n    {\n      \"url\": \"http://www.ciellobluemexreservations.com\",\n      \"laber\": \"Reservations\"\n    }\n  ],\n  \"description\": \"We provide our customers with a fun and happy environment along with our enthusiastic staff, always making sure our customers have the greatest time in our restaurants. We try to make everyone of our customers feel welcome, and to make them have a great experience with us.\",\n  \"email\": \"generalmgr@cielobluecantina.com\",\n  \"openingHours\": \"Mo,Tu,We,Th,Fr 09:00-12:00\",\n  \"hoursGeneralDescription\": \"Open 6 days a week, Tuesday to Sunday\",\n  \"conditionsOfAccess\": \"reservations accepted\",\n  \"locations\": [\n    {\n      \"streetAddress\": \"<integer>\",\n      \"addressLocality\": \"Oshawa\",\n      \"addressRegion\": \"ON\",\n      \"postalCode\": \"L1H 3M3\",\n      \"telephones\": [\n        \"905-720-2326\"\n      ]\n    },\n    {\n      \"streetAddress\": \"<integer>\",\n      \"addressLocality\": \"Oshawa\",\n      \"addressRegion\": \"ON\",\n      \"postalCode\": \"L1H 3M3\",\n      \"telephones\": [\n        \"905-720-2326\"\n      ]\n    }\n  ],\n  \"categories\": [\n    \"Food and Beverage\",\n    \"Food and Beverage\"\n  ],\n  \"subCategories\": [\n    \"Mexican Food\",\n    \"Mexican Food\"\n  ],\n  \"social\": {\n    \"facebookUrl\": \"https://www.facebook.com/CieloBlueBelmont/\",\n    \"instagramUrl\": \"https://www.instagram.com/CieloBlueBelmont/\",\n    \"twitterUrl\": \"https://www.twitter.com/CieloBlueBelmont/\",\n    \"youtubeUrl\": \"https://www.youtube.com/CieloBlueBelmont/\",\n    \"yelpUrl\": \"https://www.yelp.com/biz/Cielo-Blue-Belmont\"\n  },\n  \"acceptedPaymentMethods\": [\n    \"MasterCard\",\n    \"Cash\"\n  ],\n  \"images\": [\n    \"https://assets.ownlocal.com/images/a78feabb-df16-4fde-87aa-fba233d71671.jpeg\",\n    \"https://assets.ownlocal.com/images/bbfe0e1f-0d8a-40df-86bd-c6a2250c09ec.jpeg\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2923aac5-55ae-47ae-8fc3-41ed04d01bf6",
+          "name": "Retrieves a business",
+          "request": {
+            "name": "Retrieves a business",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "businesses",
+                ":businessUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "businessUuid",
+                  "description": "(Required) UUID of the Business requested"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b36851ae-a832-453a-83a3-803632774312",
+              "name": "ad found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses",
+                    ":businessUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "businessUuid",
+                      "description": "(Required) UUID of the Business requested"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"businessUuid\": \"69271d95-e891-4bf7-a9ba-ce249e36e236\",\n  \"businessCustomId\": \"23456\",\n  \"publisherUuids\": [\n    \"e94df8d7-cc45-4ec9-b9fa-e42f04f74c38\",\n    \"9103093d-596a-4ed4-a0ea-d7a5bfc35912\"\n  ],\n  \"name\": \"Cielo Azul Mexican Grill\",\n  \"logoUrl\": \"http://www.cielobluemexreservations.com/CieloBlueMexicanGrill_logo.jpg\",\n  \"website\": \"http://www.cielobluecantina.com\",\n  \"urls\": [\n    {\n      \"url\": \"http://www.ciellobluemexreservations.com\",\n      \"laber\": \"Reservations\"\n    },\n    {\n      \"url\": \"http://www.ciellobluemexreservations.com\",\n      \"laber\": \"Reservations\"\n    }\n  ],\n  \"description\": \"We provide our customers with a fun and happy environment along with our enthusiastic staff, always making sure our customers have the greatest time in our restaurants. We try to make everyone of our customers feel welcome, and to make them have a great experience with us.\",\n  \"email\": \"generalmgr@cielobluecantina.com\",\n  \"openingHours\": \"Mo,Tu,We,Th,Fr 09:00-12:00\",\n  \"hoursGeneralDescription\": \"Open 6 days a week, Tuesday to Sunday\",\n  \"conditionsOfAccess\": \"reservations accepted\",\n  \"locations\": [\n    {\n      \"streetAddress\": 9295,\n      \"addressLocality\": \"Oshawa\",\n      \"addressRegion\": \"ON\",\n      \"postalCode\": \"L1H 3M3\",\n      \"telephones\": [\n        \"905-720-2326\"\n      ]\n    },\n    {\n      \"streetAddress\": 3277,\n      \"addressLocality\": \"Oshawa\",\n      \"addressRegion\": \"ON\",\n      \"postalCode\": \"L1H 3M3\",\n      \"telephones\": [\n        \"905-720-2326\"\n      ]\n    }\n  ],\n  \"categories\": [\n    \"Food and Beverage\",\n    \"Food and Beverage\"\n  ],\n  \"subCategories\": [\n    \"Mexican Food\",\n    \"Mexican Food\"\n  ],\n  \"social\": {\n    \"facebookUrl\": \"https://www.facebook.com/CieloBlueBelmont/\",\n    \"instagramUrl\": \"https://www.instagram.com/CieloBlueBelmont/\",\n    \"twitterUrl\": \"https://www.twitter.com/CieloBlueBelmont/\",\n    \"youtubeUrl\": \"https://www.youtube.com/CieloBlueBelmont/\",\n    \"yelpUrl\": \"https://www.yelp.com/biz/Cielo-Blue-Belmont\"\n  },\n  \"acceptedPaymentMethods\": [\n    \"MasterCard\",\n    \"Cash\"\n  ],\n  \"images\": [\n    \"https://assets.ownlocal.com/images/a78feabb-df16-4fde-87aa-fba233d71671.jpeg\",\n    \"https://assets.ownlocal.com/images/bbfe0e1f-0d8a-40df-86bd-c6a2250c09ec.jpeg\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164d3b2a-c496-4da7-be47-6d866f6a67c8",
+              "name": "Business {business_uuid} not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses",
+                    ":businessUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "businessUuid",
+                      "description": "(Required) UUID of the Business requested"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ccd5fe4-0a61-4ffb-8230-266df89e6276",
+          "name": "Upload image for a business",
+          "request": {
+            "name": "Upload image for a business",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "businesses",
+                ":businessUuid",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "businessUuid",
+                  "description": "(Required) UUID of business to upload image for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Image to upload"
+                },
+                {
+                  "key": "fileName",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Name of the file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e276b9c7-918c-4a1d-8fba-e26a18b0e4a3",
+              "name": "Content was successfully received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses",
+                    ":businessUuid",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "businessUuid",
+                      "description": "(Required) UUID of business to upload image for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Name of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "fileName",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f2f2af25-be8c-4152-8daf-afdcf73cdb93",
+              "name": "Content could not be saved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses",
+                    ":businessUuid",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "businessUuid",
+                      "description": "(Required) UUID of business to upload image for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Name of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "fileName",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"A message indicating why the content was unacceptable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2abc9e68-c874-4b73-a19e-70d2bf748f9c",
+          "name": "Upload logo for a business",
+          "request": {
+            "name": "Upload logo for a business",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "businesses",
+                ":businessUuid",
+                "logo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "businessUuid",
+                  "description": "(Required) UUID of business to upload logo for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Logo file to upload"
+                },
+                {
+                  "key": "fileName",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Name of the file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "847d7410-2add-4ab4-b1ad-cf291cfd05f0",
+              "name": "Content was successfully received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses",
+                    ":businessUuid",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "businessUuid",
+                      "description": "(Required) UUID of business to upload logo for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Logo file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Name of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "fileName",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "570dfe0e-debe-4bf9-af7c-0986f0d46460",
+              "name": "Content could not be saved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "businesses",
+                    ":businessUuid",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "businessUuid",
+                      "description": "(Required) UUID of business to upload logo for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Logo file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Name of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "fileName",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"A message indicating why the content was unacceptable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://admin.austin.ownlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b062b015-1f58-4a43-946c-6b4035850f26",
+    "name": "OwnLocal API — Businesses",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Local business (advertiser) records — create, list, retrieve, and attach logo/imagery.\n\nContact Support:\n Name: OwnLocal Support\n Email: support@ownlocal.com",
+      "type": "text/plain"
+    }
+  }
+}

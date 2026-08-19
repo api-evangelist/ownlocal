@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OwnLocal API — Categories",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin.austin.ownlocal.com/api/v1/categories",
+            "params": [
+              {
+                "name": "sortedBy",
+                "value": "createdAt,updatedAt,startDate,endDate",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "20",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of categories"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

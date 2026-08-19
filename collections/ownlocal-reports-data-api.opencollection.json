@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OwnLocal API — Reports Data API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports Data API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Builds and returns an ads report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin.austin.ownlocal.com/api/v1/reports/ads",
+            "params": [
+              {
+                "name": "publisher_id",
+                "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "2020-02-01",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "2020-02-02",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Builds and returns an ads report"
+        },
+        {
+          "info": {
+            "name": "Builds and returns a business report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin.austin.ownlocal.com/api/v1/reports/business",
+            "params": [
+              {
+                "name": "publisher_id",
+                "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1",
+                "type": "query"
+              },
+              {
+                "name": "business_id",
+                "value": "d69b6855-7e24-47e1-96a0-11c55ca0e9a7",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "2020-02-01",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "2020-02-02",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Builds and returns a business report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

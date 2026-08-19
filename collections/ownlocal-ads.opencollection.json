@@ -1,0 +1,245 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OwnLocal API — Ads",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of Ads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin.austin.ownlocal.com/api/v1/ads",
+            "params": [
+              {
+                "name": "categories",
+                "value": "foodAndBeverage",
+                "type": "query"
+              },
+              {
+                "name": "subCategories",
+                "value": "mexicanFood,restaurants",
+                "type": "query"
+              },
+              {
+                "name": "offerCountMin",
+                "value": "5",
+                "type": "query"
+              },
+              {
+                "name": "offerCountMax",
+                "value": "7",
+                "type": "query"
+              },
+              {
+                "name": "startDateMin",
+                "value": "2019-09-01T12:34:00",
+                "type": "query"
+              },
+              {
+                "name": "startDateMax",
+                "value": "2019-09-02T16:40:01",
+                "type": "query"
+              },
+              {
+                "name": "endDateMin",
+                "value": "2019-09-29T20:21:00",
+                "type": "query"
+              },
+              {
+                "name": "endDateMax",
+                "value": "2019-09-30T10:56:00",
+                "type": "query"
+              },
+              {
+                "name": "dateModifiedMin",
+                "value": "2019-09-01T10:56:00",
+                "type": "query"
+              },
+              {
+                "name": "dateModifiedMax",
+                "value": "2019-09-07T10:56:00",
+                "type": "query"
+              },
+              {
+                "name": "dateCreatedMin",
+                "value": "2019-09-01T10:56:00",
+                "type": "query"
+              },
+              {
+                "name": "dateCreatedMax",
+                "value": "2019-09-07T12:34:00",
+                "type": "query"
+              },
+              {
+                "name": "businessUuids",
+                "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1,d69b6855-7e24-47e1-96a0-11c55ca0e9a7",
+                "type": "query"
+              },
+              {
+                "name": "publisherUuids",
+                "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1,d69b6855-7e24-47e1-96a0-11c55ca0e9a7",
+                "type": "query"
+              },
+              {
+                "name": "sortedBy",
+                "value": "createdAt,updatedAt,startDate,endDate",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "20",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of Ads"
+        },
+        {
+          "info": {
+            "name": "Creates a new ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.austin.ownlocal.com/api/v1/ads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new ad"
+        },
+        {
+          "info": {
+            "name": "Retrieves an ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin.austin.ownlocal.com/api/v1/ads/:adUuid",
+            "params": [
+              {
+                "name": "adUuid",
+                "value": "d17a5879-092e-40e8-acc4-8b04be5b91de",
+                "type": "path",
+                "description": "UUID of the Ad requested"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves an ad"
+        },
+        {
+          "info": {
+            "name": "Updates an ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://admin.austin.ownlocal.com/api/v1/ads/:adUuid",
+            "params": [
+              {
+                "name": "adUuid",
+                "value": "d17a5879-092e-40e8-acc4-8b04be5b91de",
+                "type": "path",
+                "description": "UUID of the Ad to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates an ad"
+        },
+        {
+          "info": {
+            "name": "Upload content for an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.austin.ownlocal.com/api/v1/ads/:adUuid/content",
+            "params": [
+              {
+                "name": "adUuid",
+                "value": "d17a5879-092e-40e8-acc4-8b04be5b91de",
+                "type": "path",
+                "description": "UUID of ad to upload content for"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "fileName",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload content for an Ad"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

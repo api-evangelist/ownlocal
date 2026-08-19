@@ -1,0 +1,1067 @@
+{
+  "item": [
+    {
+      "id": "08daf6bb-49c4-403b-bc0b-e419a8048651",
+      "name": "Ads",
+      "description": {
+        "content": "Print ads converted into digital ad units — create, list, retrieve, update and upload the source PDF for an ad.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87de3b28-34f4-4d32-88be-22f75f6ca3a6",
+          "name": "Creates a new ad",
+          "request": {
+            "name": "Creates a new ad",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"publisherUuid\": \"<uuid>\",\n  \"businessUuid\": \"<uuid>\",\n  \"adCustomId\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20039e14-aedc-4a3a-9246-f155c1c53273",
+              "name": "Ad was successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"publisherUuid\": \"7e6ffeb2-22f3-4869-b189-d202996814cf\",\n  \"businessUuid\": \"69271d95-e891-4bf7-a9ba-ce249e36e236\",\n  \"adCustomId\": \"234567\",\n  \"startDate\": \"2019-08-23\",\n  \"endDate\": \"2019-09-23\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"adUuid\": \"25c4ae81-095e-4229-a56b-cb2f3ae08f1f\",\n  \"status\": \"Created\",\n  \"message\": \"Your ad for {publisher name} was successfully created. Provide content for this ad at the url indicated in content_url.\",\n  \"content_url\": \"https://labs.ownlocal.com/products/datashift/v1/ads/25c4ae81-095e-4229-a56b-cb2f3ae08f1f/content\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "788523c0-3596-4ca4-bfda-6d5006d87658",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"publisherUuid\": \"7e6ffeb2-22f3-4869-b189-d202996814cf\",\n  \"businessUuid\": \"69271d95-e891-4bf7-a9ba-ce249e36e236\",\n  \"adCustomId\": \"234567\",\n  \"startDate\": \"2019-08-23\",\n  \"endDate\": \"2019-09-23\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c1248ea-2043-4652-b63a-c42fcbfad1c9",
+          "name": "Retrieve a list of Ads",
+          "request": {
+            "name": "Retrieve a list of Ads",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "subCategories",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offerCountMin",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offerCountMax",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateMin",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateMax",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDateMin",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDateMax",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedMin",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedMax",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateCreatedMin",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateCreatedMax",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "businessUuids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "businessUuids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "publisherUuids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "publisherUuids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortedBy",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5ca09899-2c5d-4c73-988b-121b74f3eef6",
+              "name": "ads found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "foodAndBeverage"
+                    },
+                    {
+                      "key": "subCategories",
+                      "value": "mexicanFood,restaurants"
+                    },
+                    {
+                      "key": "offerCountMin",
+                      "value": "5"
+                    },
+                    {
+                      "key": "offerCountMax",
+                      "value": "7"
+                    },
+                    {
+                      "key": "startDateMin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "startDateMax",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDateMin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDateMax",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateModifiedMin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateModifiedMax",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateCreatedMin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateCreatedMax",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "businessUuids",
+                      "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1"
+                    },
+                    {
+                      "key": "businessUuids",
+                      "value": "d69b6855-7e24-47e1-96a0-11c55ca0e9a7"
+                    },
+                    {
+                      "key": "publisherUuids",
+                      "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1"
+                    },
+                    {
+                      "key": "publisherUuids",
+                      "value": "d69b6855-7e24-47e1-96a0-11c55ca0e9a7"
+                    },
+                    {
+                      "key": "sortedBy",
+                      "value": "createdAt,updatedAt,startDate,endDate"
+                    },
+                    {
+                      "key": "page",
+                      "value": "2"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"adUuid\": \"795d064b-1810-4f6b-bada-6a9f7d534579\",\n    \"businessUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n    \"publisherUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n    \"startDate\": \"2019-09-01\",\n    \"endDate\": \"2019-09-30\",\n    \"dateModified\": \"2019-09-03\",\n    \"dateCreated\": \"2019-09-03\",\n    \"fileName\": \"a5c26951-cc4f-e6b3-fc44-8d424c2d82be\",\n    \"adCustomId\": \"234567\",\n    \"image\": \"https://assets.ownlocal.com/ads/795d064b-1810-4f6b-bada-6a9f7d534579/order_image.jpeg\",\n    \"adText\": \"string\",\n    \"offerCount\": 4,\n    \"offers\": [\n      {\n        \"offerUuid\": \"bbfdc747-b2c9-4232-be7a-81dbf5290af4\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png\",\n        \"title\": \"40% Off Full Interior Detail Package\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77015300\n          },\n          {\n            \"class\": 77015301\n          }\n        ]\n      },\n      {\n        \"offerUuid\": \"5faaff6a-5ad9-4fcf-b68d-a025b1badd29\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/5faaff6a-5ad9-4fcf-b68d-a025b1badd29.png\",\n        \"title\": \"Free Brake Inspection with Every Oil Change\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77015300\n          },\n          {\n            \"class\": 77015301\n          }\n        ]\n      },\n      {\n        \"offerUuid\": \"2df8c96b-f565-4c77-b776-8b02a9a92d30\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/2df8c96b-f565-4c77-b776-8b02a9a92d30.png\",\n        \"title\": \"20% Off Full Vehicle Tint\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77011700\n          },\n          {\n            \"class\": 77011701\n          }\n        ]\n      },\n      {\n        \"offerUuid\": \"fea2a6e0-7993-460a-9a54-88acf6dc479b\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/fea2a6e0-7993-460a-9a54-88acf6dc479b.png\",\n        \"title\": \"$150 Off Windshield Replacement (when going through Insurance)\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77011300\n          },\n          {\n            \"class\": 77011301\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"adUuid\": \"795d064b-1810-4f6b-bada-6a9f7d534579\",\n    \"businessUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n    \"publisherUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n    \"startDate\": \"2019-09-01\",\n    \"endDate\": \"2019-09-30\",\n    \"dateModified\": \"2019-09-03\",\n    \"dateCreated\": \"2019-09-03\",\n    \"fileName\": \"0ea2d774-2025-b57f-4722-51f35e672c1e\",\n    \"adCustomId\": \"234567\",\n    \"image\": \"https://assets.ownlocal.com/ads/795d064b-1810-4f6b-bada-6a9f7d534579/order_image.jpeg\",\n    \"adText\": \"string\",\n    \"offerCount\": 4,\n    \"offers\": [\n      {\n        \"offerUuid\": \"bbfdc747-b2c9-4232-be7a-81dbf5290af4\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png\",\n        \"title\": \"40% Off Full Interior Detail Package\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77015300\n          },\n          {\n            \"class\": 77015301\n          }\n        ]\n      },\n      {\n        \"offerUuid\": \"5faaff6a-5ad9-4fcf-b68d-a025b1badd29\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/5faaff6a-5ad9-4fcf-b68d-a025b1badd29.png\",\n        \"title\": \"Free Brake Inspection with Every Oil Change\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77015300\n          },\n          {\n            \"class\": 77015301\n          }\n        ]\n      },\n      {\n        \"offerUuid\": \"2df8c96b-f565-4c77-b776-8b02a9a92d30\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/2df8c96b-f565-4c77-b776-8b02a9a92d30.png\",\n        \"title\": \"20% Off Full Vehicle Tint\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77011700\n          },\n          {\n            \"class\": 77011701\n          }\n        ]\n      },\n      {\n        \"offerUuid\": \"fea2a6e0-7993-460a-9a54-88acf6dc479b\",\n        \"offerImage\": \"https://ownlocal.imgix.net/offers/fea2a6e0-7993-460a-9a54-88acf6dc479b.png\",\n        \"title\": \"$150 Off Windshield Replacement (when going through Insurance)\",\n        \"description\": \"\",\n        \"originalPrice\": \"\",\n        \"discountPercentage\": \"\",\n        \"discountPrice\": \"\",\n        \"discountOff\": \"\",\n        \"newPrice\": \"\",\n        \"bogo\": false,\n        \"free\": false,\n        \"validThrough\": \"\",\n        \"gtin8\": [\n          {\n            \"class\": 77011300\n          },\n          {\n            \"class\": 77011301\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ed2cc53-fb4c-4a9b-a650-3d53d862da61",
+          "name": "Retrieves an ad",
+          "request": {
+            "name": "Retrieves an ad",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "ads",
+                ":adUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "adUuid",
+                  "description": "(Required) UUID of the Ad requested"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "24bab63b-c34e-4269-b4e8-67ef5b3bb50b",
+              "name": "ad found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads",
+                    ":adUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "adUuid",
+                      "description": "(Required) UUID of the Ad requested"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"adUuid\": \"795d064b-1810-4f6b-bada-6a9f7d534579\",\n  \"businessUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"publisherUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"startDate\": \"2019-09-01\",\n  \"endDate\": \"2019-09-30\",\n  \"dateModified\": \"2019-09-03\",\n  \"dateCreated\": \"2019-09-03\",\n  \"fileName\": \"05da2592-b6f8-427a-a56a-5d509d207e49\",\n  \"adCustomId\": \"234567\",\n  \"image\": \"https://assets.ownlocal.com/ads/795d064b-1810-4f6b-bada-6a9f7d534579/order_image.jpeg\",\n  \"adText\": \"string\",\n  \"offerCount\": 4,\n  \"offers\": [\n    {\n      \"offerUuid\": \"bbfdc747-b2c9-4232-be7a-81dbf5290af4\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png\",\n      \"title\": \"40% Off Full Interior Detail Package\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"5faaff6a-5ad9-4fcf-b68d-a025b1badd29\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/5faaff6a-5ad9-4fcf-b68d-a025b1badd29.png\",\n      \"title\": \"Free Brake Inspection with Every Oil Change\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"2df8c96b-f565-4c77-b776-8b02a9a92d30\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/2df8c96b-f565-4c77-b776-8b02a9a92d30.png\",\n      \"title\": \"20% Off Full Vehicle Tint\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011700\n        },\n        {\n          \"class\": 77011701\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"fea2a6e0-7993-460a-9a54-88acf6dc479b\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/fea2a6e0-7993-460a-9a54-88acf6dc479b.png\",\n      \"title\": \"$150 Off Windshield Replacement (when going through Insurance)\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011300\n        },\n        {\n          \"class\": 77011301\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b84c70e-9d1c-4501-a59e-3f6d5f4b26e3",
+              "name": "Ad {ad_uuid} not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads",
+                    ":adUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "adUuid",
+                      "description": "(Required) UUID of the Ad requested"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40686f88-23d8-43c5-abac-aa9a97b6f10c",
+          "name": "Updates an ad",
+          "request": {
+            "name": "Updates an ad",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "ads",
+                ":adUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "adUuid",
+                  "description": "(Required) UUID of the Ad to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"adUuid\": \"<uuid>\",\n  \"businessUuid\": \"<uuid>\",\n  \"publisherUuid\": \"<uuid>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"dateModified\": \"<date>\",\n  \"dateCreated\": \"<date>\",\n  \"fileName\": \"<uuid>\",\n  \"adCustomId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"adText\": \"<string>\",\n  \"offerCount\": \"<long>\",\n  \"offers\": [\n    {\n      \"offerUuid\": \"<uuid>\",\n      \"offerImage\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"originalPrice\": \"<string>\",\n      \"discountPercentage\": \"<string>\",\n      \"discountPrice\": \"<string>\",\n      \"discountOff\": \"<string>\",\n      \"newPrice\": \"<string>\",\n      \"bogo\": \"<boolean>\",\n      \"free\": \"<boolean>\",\n      \"validThrough\": \"<string>\",\n      \"gtin8\": [\n        {\n          \"class\": \"<long>\"\n        },\n        {\n          \"class\": \"<long>\"\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"<uuid>\",\n      \"offerImage\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"originalPrice\": \"<string>\",\n      \"discountPercentage\": \"<string>\",\n      \"discountPrice\": \"<string>\",\n      \"discountOff\": \"<string>\",\n      \"newPrice\": \"<string>\",\n      \"bogo\": \"<boolean>\",\n      \"free\": \"<boolean>\",\n      \"validThrough\": \"<string>\",\n      \"gtin8\": [\n        {\n          \"class\": \"<long>\"\n        },\n        {\n          \"class\": \"<long>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f47d3ec-36ef-4603-ba6d-89c3c3270d5e",
+              "name": "ad updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads",
+                    ":adUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "adUuid",
+                      "description": "(Required) UUID of the Ad to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"adUuid\": \"795d064b-1810-4f6b-bada-6a9f7d534579\",\n  \"businessUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"publisherUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"startDate\": \"2019-09-01\",\n  \"endDate\": \"2019-09-30\",\n  \"dateModified\": \"2019-09-03\",\n  \"dateCreated\": \"2019-09-03\",\n  \"fileName\": \"<uuid>\",\n  \"adCustomId\": \"234567\",\n  \"image\": \"https://assets.ownlocal.com/ads/795d064b-1810-4f6b-bada-6a9f7d534579/order_image.jpeg\",\n  \"adText\": \"<string>\",\n  \"offerCount\": 4,\n  \"offers\": [\n    {\n      \"offerUuid\": \"bbfdc747-b2c9-4232-be7a-81dbf5290af4\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png\",\n      \"title\": \"40% Off Full Interior Detail Package\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"5faaff6a-5ad9-4fcf-b68d-a025b1badd29\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/5faaff6a-5ad9-4fcf-b68d-a025b1badd29.png\",\n      \"title\": \"Free Brake Inspection with Every Oil Change\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"2df8c96b-f565-4c77-b776-8b02a9a92d30\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/2df8c96b-f565-4c77-b776-8b02a9a92d30.png\",\n      \"title\": \"20% Off Full Vehicle Tint\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011700\n        },\n        {\n          \"class\": 77011701\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"fea2a6e0-7993-460a-9a54-88acf6dc479b\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/fea2a6e0-7993-460a-9a54-88acf6dc479b.png\",\n      \"title\": \"$150 Off Windshield Replacement (when going through Insurance)\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011300\n        },\n        {\n          \"class\": 77011301\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"adUuid\": \"795d064b-1810-4f6b-bada-6a9f7d534579\",\n  \"businessUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"publisherUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"startDate\": \"2019-09-01\",\n  \"endDate\": \"2019-09-30\",\n  \"dateModified\": \"2019-09-03\",\n  \"dateCreated\": \"2019-09-03\",\n  \"fileName\": \"05da2592-b6f8-427a-a56a-5d509d207e49\",\n  \"adCustomId\": \"234567\",\n  \"image\": \"https://assets.ownlocal.com/ads/795d064b-1810-4f6b-bada-6a9f7d534579/order_image.jpeg\",\n  \"adText\": \"string\",\n  \"offerCount\": 4,\n  \"offers\": [\n    {\n      \"offerUuid\": \"bbfdc747-b2c9-4232-be7a-81dbf5290af4\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png\",\n      \"title\": \"40% Off Full Interior Detail Package\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"5faaff6a-5ad9-4fcf-b68d-a025b1badd29\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/5faaff6a-5ad9-4fcf-b68d-a025b1badd29.png\",\n      \"title\": \"Free Brake Inspection with Every Oil Change\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"2df8c96b-f565-4c77-b776-8b02a9a92d30\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/2df8c96b-f565-4c77-b776-8b02a9a92d30.png\",\n      \"title\": \"20% Off Full Vehicle Tint\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011700\n        },\n        {\n          \"class\": 77011701\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"fea2a6e0-7993-460a-9a54-88acf6dc479b\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/fea2a6e0-7993-460a-9a54-88acf6dc479b.png\",\n      \"title\": \"$150 Off Windshield Replacement (when going through Insurance)\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011300\n        },\n        {\n          \"class\": 77011301\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d660938-609a-476e-9202-9853a8c54735",
+              "name": "Unpermitted params: {invalid params}",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads",
+                    ":adUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "adUuid",
+                      "description": "(Required) UUID of the Ad to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"adUuid\": \"795d064b-1810-4f6b-bada-6a9f7d534579\",\n  \"businessUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"publisherUuid\": \"2db5e240-c098-4d59-b3a3-bc7b7abc2c4c\",\n  \"startDate\": \"2019-09-01\",\n  \"endDate\": \"2019-09-30\",\n  \"dateModified\": \"2019-09-03\",\n  \"dateCreated\": \"2019-09-03\",\n  \"fileName\": \"<uuid>\",\n  \"adCustomId\": \"234567\",\n  \"image\": \"https://assets.ownlocal.com/ads/795d064b-1810-4f6b-bada-6a9f7d534579/order_image.jpeg\",\n  \"adText\": \"<string>\",\n  \"offerCount\": 4,\n  \"offers\": [\n    {\n      \"offerUuid\": \"bbfdc747-b2c9-4232-be7a-81dbf5290af4\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png\",\n      \"title\": \"40% Off Full Interior Detail Package\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"5faaff6a-5ad9-4fcf-b68d-a025b1badd29\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/5faaff6a-5ad9-4fcf-b68d-a025b1badd29.png\",\n      \"title\": \"Free Brake Inspection with Every Oil Change\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77015300\n        },\n        {\n          \"class\": 77015301\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"2df8c96b-f565-4c77-b776-8b02a9a92d30\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/2df8c96b-f565-4c77-b776-8b02a9a92d30.png\",\n      \"title\": \"20% Off Full Vehicle Tint\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011700\n        },\n        {\n          \"class\": 77011701\n        }\n      ]\n    },\n    {\n      \"offerUuid\": \"fea2a6e0-7993-460a-9a54-88acf6dc479b\",\n      \"offerImage\": \"https://ownlocal.imgix.net/offers/fea2a6e0-7993-460a-9a54-88acf6dc479b.png\",\n      \"title\": \"$150 Off Windshield Replacement (when going through Insurance)\",\n      \"description\": \"\",\n      \"originalPrice\": \"\",\n      \"discountPercentage\": \"\",\n      \"discountPrice\": \"\",\n      \"discountOff\": \"\",\n      \"newPrice\": \"\",\n      \"bogo\": false,\n      \"free\": false,\n      \"validThrough\": \"\",\n      \"gtin8\": [\n        {\n          \"class\": 77011300\n        },\n        {\n          \"class\": 77011301\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6858b78-2a76-4b91-b3fe-9832cca839ba",
+          "name": "Upload content for an Ad",
+          "request": {
+            "name": "Upload content for an Ad",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "ads",
+                ":adUuid",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "adUuid",
+                  "description": "(Required) UUID of ad to upload content for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) PDF to be associated with ad"
+                },
+                {
+                  "key": "fileName",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Name of the file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4ec2ebc2-524f-4430-a699-0213f260cb45",
+              "name": "Content was successfully received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads",
+                    ":adUuid",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "adUuid",
+                      "description": "(Required) UUID of ad to upload content for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) PDF to be associated with ad",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Name of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "fileName",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6459f934-7699-4f11-bd0d-06035e3e5995",
+              "name": "Content could not be saved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "ads",
+                    ":adUuid",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "adUuid",
+                      "description": "(Required) UUID of ad to upload content for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) PDF to be associated with ad",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Name of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "fileName",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"A message indicating why the content was unacceptable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://admin.austin.ownlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "794d60f9-3f97-4de5-9d98-635a83d3cabc",
+    "name": "OwnLocal API — Ads",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Print ads converted into digital ad units — create, list, retrieve, update and upload the source PDF for an ad.\n\nContact Support:\n Name: OwnLocal Support\n Email: support@ownlocal.com",
+      "type": "text/plain"
+    }
+  }
+}

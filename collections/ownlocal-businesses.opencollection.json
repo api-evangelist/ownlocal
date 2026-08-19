@@ -1,0 +1,221 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OwnLocal API — Businesses",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Businesses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of businesses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin.austin.ownlocal.com/api/v1/businesses",
+            "params": [
+              {
+                "name": "categories",
+                "value": "foodAndBeverage",
+                "type": "query"
+              },
+              {
+                "name": "subCategories",
+                "value": "mexicanFood,restaurants",
+                "type": "query"
+              },
+              {
+                "name": "dateModifiedMin",
+                "value": "2019-09-01T10:56:00",
+                "type": "query"
+              },
+              {
+                "name": "dateModifiedMax",
+                "value": "2019-09-07T10:56:00",
+                "type": "query"
+              },
+              {
+                "name": "dateCreatedMin",
+                "value": "2019-09-01T10:56:00",
+                "type": "query"
+              },
+              {
+                "name": "dateCreatedMax",
+                "value": "2019-09-07T12:34:00",
+                "type": "query"
+              },
+              {
+                "name": "publisherUuids",
+                "value": "7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1,d69b6855-7e24-47e1-96a0-11c55ca0e9a7",
+                "type": "query"
+              },
+              {
+                "name": "sortedBy",
+                "value": "createdAt,updatedAt,startDate,endDate",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "20",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of businesses"
+        },
+        {
+          "info": {
+            "name": "Create a new business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.austin.ownlocal.com/api/v1/businesses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new business"
+        },
+        {
+          "info": {
+            "name": "Retrieves a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin.austin.ownlocal.com/api/v1/businesses/:businessUuid",
+            "params": [
+              {
+                "name": "businessUuid",
+                "value": "725f5b11-f3f0-42e8-88b7-0d46daa1a72d",
+                "type": "path",
+                "description": "UUID of the Business requested"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves a business"
+        },
+        {
+          "info": {
+            "name": "Upload image for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.austin.ownlocal.com/api/v1/businesses/:businessUuid/images",
+            "params": [
+              {
+                "name": "businessUuid",
+                "value": "25c4ae81-095e-4229-a56b-cb2f3ae08f1f",
+                "type": "path",
+                "description": "UUID of business to upload image for"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "fileName",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload image for a business"
+        },
+        {
+          "info": {
+            "name": "Upload logo for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.austin.ownlocal.com/api/v1/businesses/:businessUuid/logo",
+            "params": [
+              {
+                "name": "businessUuid",
+                "value": "25c4ae81-095e-4229-a56b-cb2f3ae08f1f",
+                "type": "path",
+                "description": "UUID of business to upload logo for"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "fileName",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload logo for a business"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

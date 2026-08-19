@@ -1,0 +1,173 @@
+{
+  "item": [
+    {
+      "id": "cf7e66de-5dcf-4b3c-a09c-47ac7a02affb",
+      "name": "Categories",
+      "description": {
+        "content": "The OwnLocal business category and sub-category vocabulary used to classify businesses and filter ads.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62d8cbb8-dfeb-460c-b331-c961134b7a3d",
+          "name": "Retrieve a list of categories",
+          "request": {
+            "name": "Retrieve a list of categories",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sortedBy",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "aa05f291-9fa1-4729-86bc-5ff57704f63f",
+              "name": "categories found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortedBy",
+                      "value": "createdAt,updatedAt,startDate,endDate"
+                    },
+                    {
+                      "key": "page",
+                      "value": "2"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"Communication\",\n    \"subCategories\": [\n      \"Broadcasting Services\",\n      \"Cable TV\",\n      \"Newspapers and Magazines\",\n      \"Other\",\n      \"Publishing\",\n      \"Radio Stations\",\n      \"Telecommunications\",\n      \"TV Stations\"\n    ]\n  },\n  {\n    \"title\": \"Communication\",\n    \"subCategories\": [\n      \"Broadcasting Services\",\n      \"Cable TV\",\n      \"Newspapers and Magazines\",\n      \"Other\",\n      \"Publishing\",\n      \"Radio Stations\",\n      \"Telecommunications\",\n      \"TV Stations\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://admin.austin.ownlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f3d509de-0c6d-4446-b5f6-feba6da0745a",
+    "name": "OwnLocal API — Categories",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OwnLocal business category and sub-category vocabulary used to classify businesses and filter ads.\n\nContact Support:\n Name: OwnLocal Support\n Email: support@ownlocal.com",
+      "type": "text/plain"
+    }
+  }
+}
