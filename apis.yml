@@ -48,46 +48,24 @@ tags:
 - Ad Reporting
 - Publishers
 apis:
-- name: OwnLocal API
+- aid: ownlocal:ownlocal-ads-api
+  name: OwnLocal Ads API
   description: >-
-    Partner-facing REST API (v1) for OwnLocal's automated print-to-digital advertising platform. Publishers
-    and their systems create and list ads, upload the source print-ad PDF for conversion, create and update
-    the local business (advertiser) records those ads belong to, attach logos and imagery, read the OwnLocal
-    category vocabulary, and pull performance reports covering impressions, interaction breakdowns, leads,
-    digital lift and search-rank history. Authenticated with an organization API key sent raw in the
-    Authorization header; keys are issued by OwnLocal support, not self-serve.
+    Print ads converted into digital ad units — create, list, retrieve, update and upload the source PDF
+    for an ad.
   humanURL: https://api.docs.ownlocal.com/
   baseURL: https://admin.austin.ownlocal.com
   tags:
-  - Advertising
-  - Digital Advertising
-  - Local Media
-  - Business Listings
-  - Ad Reporting
-  - AdTech
+  - Ads
   properties:
+  - type: OpenAPI
+    url: openapi/ownlocal-ads-api-openapi.yml
   - type: Documentation
     url: https://api.docs.ownlocal.com/
   - type: APIReference
     url: https://api.docs.ownlocal.com/
   - type: Swagger
     url: https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
-  - type: OpenAPI
-    url: openapi/ownlocal-ads-openapi.yml
-  - type: OpenAPI
-    url: openapi/ownlocal-businesses-openapi.yml
-  - type: OpenAPI
-    url: openapi/ownlocal-categories-openapi.yml
-  - type: OpenAPI
-    url: openapi/ownlocal-reports-data-api-openapi.yml
-  - type: Overlay
-    url: overlays/ownlocal-ads-overlay.yaml
-  - type: Overlay
-    url: overlays/ownlocal-businesses-overlay.yaml
-  - type: Overlay
-    url: overlays/ownlocal-categories-overlay.yaml
-  - type: Overlay
-    url: overlays/ownlocal-reports-data-api-overlay.yaml
   - type: Authentication
     url: authentication/ownlocal-authentication.yml
   - type: Conventions
@@ -98,8 +76,94 @@ apis:
     url: errors/ownlocal-problem-types.yml
   - type: RateLimits
     url: rate-limits/ownlocal-rate-limits.yml
-  - type: MCPServer
-    url: mcp/ownlocal-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/ownlocal-tool-crosswalk.yml
+- aid: ownlocal:ownlocal-businesses-api
+  name: OwnLocal Businesses API
+  description: Local business (advertiser) records — create, list, retrieve, and attach logo/imagery.
+  humanURL: https://api.docs.ownlocal.com/
+  baseURL: https://admin.austin.ownlocal.com
+  tags:
+  - Businesses
+  properties:
+  - type: OpenAPI
+    url: openapi/ownlocal-businesses-api-openapi.yml
+  - type: Documentation
+    url: https://api.docs.ownlocal.com/
+  - type: APIReference
+    url: https://api.docs.ownlocal.com/
+  - type: Swagger
+    url: https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
+  - type: Authentication
+    url: authentication/ownlocal-authentication.yml
+  - type: Conventions
+    url: conventions/ownlocal-conventions.yml
+  - type: DataModel
+    url: data-model/ownlocal-data-model.yml
+  - type: ErrorCatalog
+    url: errors/ownlocal-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/ownlocal-rate-limits.yml
+  - type: ToolCrosswalk
+    url: mcp/ownlocal-tool-crosswalk.yml
+- aid: ownlocal:ownlocal-categories-api
+  name: OwnLocal Categories API
+  description: >-
+    The OwnLocal business category and sub-category vocabulary used to classify businesses and filter
+    ads.
+  humanURL: https://api.docs.ownlocal.com/
+  baseURL: https://admin.austin.ownlocal.com
+  tags:
+  - Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/ownlocal-categories-api-openapi.yml
+  - type: Documentation
+    url: https://api.docs.ownlocal.com/
+  - type: APIReference
+    url: https://api.docs.ownlocal.com/
+  - type: Swagger
+    url: https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
+  - type: Authentication
+    url: authentication/ownlocal-authentication.yml
+  - type: Conventions
+    url: conventions/ownlocal-conventions.yml
+  - type: DataModel
+    url: data-model/ownlocal-data-model.yml
+  - type: ErrorCatalog
+    url: errors/ownlocal-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/ownlocal-rate-limits.yml
+  - type: ToolCrosswalk
+    url: mcp/ownlocal-tool-crosswalk.yml
+- aid: ownlocal:ownlocal-reports-data-api-api
+  name: OwnLocal Reports Data API
+  description: >-
+    Performance reporting for ads and businesses — impressions, interaction breakdowns, leads, digital
+    lift and search-rank history.
+  humanURL: https://api.docs.ownlocal.com/
+  baseURL: https://admin.austin.ownlocal.com
+  tags:
+  - Reports Data API
+  properties:
+  - type: OpenAPI
+    url: openapi/ownlocal-reports-data-api-api-openapi.yml
+  - type: Documentation
+    url: https://api.docs.ownlocal.com/
+  - type: APIReference
+    url: https://api.docs.ownlocal.com/
+  - type: Swagger
+    url: https://admin.austin.ownlocal.com/api-docs/v1/swagger.json
+  - type: Authentication
+    url: authentication/ownlocal-authentication.yml
+  - type: Conventions
+    url: conventions/ownlocal-conventions.yml
+  - type: DataModel
+    url: data-model/ownlocal-data-model.yml
+  - type: ErrorCatalog
+    url: errors/ownlocal-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/ownlocal-rate-limits.yml
   - type: ToolCrosswalk
     url: mcp/ownlocal-tool-crosswalk.yml
 maintainers:
@@ -108,6 +172,16 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/ownlocal-ads-overlay.yaml
+- type: Overlay
+  url: overlays/ownlocal-businesses-overlay.yaml
+- type: Overlay
+  url: overlays/ownlocal-categories-overlay.yaml
+- type: Overlay
+  url: overlays/ownlocal-reports-data-api-overlay.yaml
+- type: MCPServer
+  url: mcp/ownlocal-mcp.yml
 - type: Website
   url: https://ownlocal.com
 - type: Documentation
