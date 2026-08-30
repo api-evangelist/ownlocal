@@ -1,0 +1,228 @@
+openapi: 3.2.0
+info:
+  title: OwnLocal API — Reports Data Reports Data API
+  version: v1
+  description: Performance reporting for ads and businesses — impressions, interaction breakdowns, leads, digital lift and search-rank history.
+  contact:
+    name: OwnLocal Support
+    email: support@ownlocal.com
+    url: https://www.ownlocal.com/support/
+servers:
+- url: https://admin.austin.ownlocal.com
+  description: OwnLocal production API host (per the published API reference)
+security:
+- apiKey: []
+tags:
+- name: Reports Data API
+  description: Performance reporting for ads and businesses — impressions, interaction breakdowns, leads, digital lift and search-rank history.
+paths:
+  /api/v1/reports/ads:
+    get:
+      tags:
+      - Reports Data API
+      summary: Builds and returns an ads report
+      operationId: getAdsReport
+      parameters:
+      - name: publisher_id
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1
+      - name: start_date
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2020-02-01'
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2020-02-02'
+      responses:
+        '200':
+          description: result ads report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ads_report'
+      security:
+      - apiKey: []
+  /api/v1/reports/business:
+    get:
+      tags:
+      - Reports Data API
+      summary: Builds and returns a business report
+      operationId: getBusinessReport
+      parameters:
+      - name: publisher_id
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1
+      - name: business_id
+        in: query
+        required: false
+        schema:
+          type: string
+        example: d69b6855-7e24-47e1-96a0-11c55ca0e9a7
+      - name: start_date
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2020-02-01'
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2020-02-02'
+      responses:
+        '200':
+          description: result business report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business_report'
+      security:
+      - apiKey: []
+components:
+  schemas:
+    business_report:
+      type: object
+      properties:
+        start_date:
+          type: string
+          example: '2020-06-01'
+          format: date
+        end_date:
+          type: string
+          example: '2020-07-01'
+          format: date
+        business_name:
+          type: string
+          example: My Local Business
+          format: string
+        business_id:
+          type: string
+          example: 2db5e240-c098-4d59-b3a3-bc7b7abc2c4c
+          format: uuid
+        reach_report:
+          type: object
+          items:
+            type: object
+            description: 'Unconstrained: the OwnLocal source Swagger references ''#/definitions/business_reach'' but never defines it. Shape is only knowable from the response example.'
+            x-ownlocal-unresolved-ref: '#/definitions/business_reach'
+          example:
+            print_distribution: 0
+            online_impressions:
+              overall: 277160
+            total_ads: 13
+            directory:
+              days: 31
+              impressions: 0
+            origami:
+              ads: 9
+              days: 10
+              impressions:
+                overall: 277160
+            interaction_breakdown:
+              breakdowns:
+                overall:
+                  total_clicks: 209
+                  about_us_clicks: 1
+                  contact_clicks: 0
+                  expand_ad_unit_clicks: 181
+                  print_ad_clicks: 0
+                  website_clicks: 19
+                  facebook_clicks: 0
+                  twitter_clicks: 0
+                  instagram_clicks: 0
+                  yelp_clicks: 0
+                  call_clicks: 1
+                  directions_clicks: 7
+                  contact_form_submits: 0
+                  share: 0
+    ads_report:
+      type: object
+      properties:
+        start_date:
+          type: string
+          example: '2020-06-01'
+          format: date
+        end_date:
+          type: string
+          example: '2020-07-01'
+          format: date
+        publisher_name:
+          type: string
+          example: The Pub News
+          format: string
+        publisher_id:
+          type: string
+          example: 2db5e240-c098-4d59-b3a3-bc7b7abc2c4c
+          format: uuid
+        ads:
+          type: array
+          items:
+            type: object
+            description: 'Unconstrained: the OwnLocal source Swagger references ''#/definitions/ad_reach'' but never defines it. Shape is only knowable from the response example.'
+            x-ownlocal-unresolved-ref: '#/definitions/ad_reach'
+          example:
+          - uuid: 87415afa-ac85-4f55-b869-c63532d02ffe
+            start_date: '2020-06-24'
+            end_date: '2020-06-25'
+            data:
+              online_impressions:
+                overall: 11346
+              interaction_breakdown:
+                breakdowns:
+                  overall:
+                    total_clicks: 9
+                    about_us_clicks: 0
+                    contact_clicks: 0
+                    expand_ad_unit_clicks: 9
+                    print_ad_clicks: 0
+                    website_clicks: 0
+                    facebook_clicks: 0
+                    twitter_clicks: 0
+                    instagram_clicks: 0
+                    yelp_clicks: 0
+                    call_clicks: 0
+                    directions_clicks: 0
+                    contact_form_submits: 0
+                    share: 0
+          - uuid: a3c6f485-07b1-4241-9bc7-9945be77d0a5
+            data:
+              online_impressions:
+                overall: 11410
+              interaction_breakdown:
+                breakdowns:
+                  overall:
+                    total_clicks: 4
+                    about_us_clicks: 0
+                    contact_clicks: 0
+                    expand_ad_unit_clicks: 4
+                    print_ad_clicks: 0
+                    website_clicks: 0
+                    facebook_clicks: 0
+                    twitter_clicks: 0
+                    instagram_clicks: 0
+                    yelp_clicks: 0
+                    call_clicks: 0
+                    directions_clicks: 0
+                    contact_form_submits: 0
+                    share: 0
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Organization API key sent raw (no scheme prefix) in the Authorization header. Keys are issued by OwnLocal support; there is no self-serve key provisioning.
+externalDocs:
+  description: OwnLocal API Docs
+  url: https://api.docs.ownlocal.com/

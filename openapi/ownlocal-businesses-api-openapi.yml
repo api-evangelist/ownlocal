@@ -1,0 +1,388 @@
+openapi: 3.2.0
+info:
+  title: OwnLocal Businesses API
+  version: v1
+  description: Local business (advertiser) records — create, list, retrieve, and attach logo/imagery.
+  contact:
+    name: OwnLocal Support
+    email: support@ownlocal.com
+    url: https://www.ownlocal.com/support/
+servers:
+- url: https://admin.austin.ownlocal.com
+  description: OwnLocal production API host (per the published API reference)
+security:
+- apiKey: []
+tags:
+- name: Businesses
+  description: Local business (advertiser) records — create, list, retrieve, and attach logo/imagery.
+paths:
+  /api/v1/businesses:
+    get:
+      tags:
+      - Businesses
+      summary: Retrieve a list of businesses
+      operationId: listBusinesses
+      parameters:
+      - name: categories
+        in: query
+        required: false
+        schema:
+          type: string
+        example: foodAndBeverage
+      - name: subCategories
+        in: query
+        required: false
+        schema:
+          type: string
+        example: mexicanFood,restaurants
+      - name: dateModifiedMin
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        example: '2019-09-01T10:56:00'
+      - name: dateModifiedMax
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        example: '2019-09-07T10:56:00'
+      - name: dateCreatedMin
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        example: '2019-09-01T10:56:00'
+      - name: dateCreatedMax
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        example: '2019-09-07T12:34:00'
+      - name: publisherUuids
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - 7f188b7b-7bc8-452e-9bb6-82bb3e13f4b1
+        - d69b6855-7e24-47e1-96a0-11c55ca0e9a7
+      - name: sortedBy
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdAt,updatedAt,startDate,endDate
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 2
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 20
+      responses:
+        '200':
+          description: businesses found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/business'
+      security:
+      - apiKey: []
+    post:
+      tags:
+      - Businesses
+      summary: Create a new business
+      operationId: createBusiness
+      requestBody:
+        required: true
+        description: Business to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/business'
+      responses:
+        '201':
+          description: Business was successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  businessUuid:
+                    type: string
+                    example: 25c4ae81-095e-4229-a56b-cb2f3ae08f1f
+                    format: uuid
+                  status:
+                    type: string
+                    example: Created
+                  message:
+                    type: string
+                    example: Your business {business name} was successfully created.
+        '405':
+          description: Invalid input
+      security:
+      - apiKey: []
+  /api/v1/businesses/{businessUuid}:
+    get:
+      tags:
+      - Businesses
+      summary: Retrieves a business
+      operationId: getBusiness
+      parameters:
+      - name: businessUuid
+        in: path
+        description: UUID of the Business requested
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 725f5b11-f3f0-42e8-88b7-0d46daa1a72d
+      responses:
+        '200':
+          description: ad found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business'
+        '404':
+          description: Business {business_uuid} not found
+      security:
+      - apiKey: []
+  /api/v1/businesses/{businessUuid}/images:
+    post:
+      tags:
+      - Businesses
+      summary: Upload image for a business
+      operationId: uploadBusinessImage
+      parameters:
+      - name: businessUuid
+        in: path
+        description: UUID of business to upload image for
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 25c4ae81-095e-4229-a56b-cb2f3ae08f1f
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Image to upload
+                fileName:
+                  type: string
+                  description: Name of the file
+              required:
+              - file
+              - fileName
+      responses:
+        '202':
+          description: Content was successfully received
+        '400':
+          description: Content could not be saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unacceptableContent'
+      security:
+      - apiKey: []
+  /api/v1/businesses/{businessUuid}/logo:
+    post:
+      tags:
+      - Businesses
+      summary: Upload logo for a business
+      operationId: uploadBusinessLogo
+      parameters:
+      - name: businessUuid
+        in: path
+        description: UUID of business to upload logo for
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 25c4ae81-095e-4229-a56b-cb2f3ae08f1f
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Logo file to upload
+                fileName:
+                  type: string
+                  description: Name of the file
+              required:
+              - file
+              - fileName
+      responses:
+        '202':
+          description: Content was successfully received
+        '400':
+          description: Content could not be saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unacceptableContent'
+      security:
+      - apiKey: []
+components:
+  schemas:
+    business:
+      type: object
+      properties:
+        businessUuid:
+          type: string
+          example: 69271d95-e891-4bf7-a9ba-ce249e36e236
+          format: uuid
+        businessCustomId:
+          type: string
+          example: '23456'
+        publisherUuids:
+          type: array
+          items:
+            type: string
+          example:
+          - e94df8d7-cc45-4ec9-b9fa-e42f04f74c38
+          - 9103093d-596a-4ed4-a0ea-d7a5bfc35912
+        name:
+          type: string
+          example: Cielo Azul Mexican Grill
+        logoUrl:
+          type: string
+          example: http://www.cielobluemexreservations.com/CieloBlueMexicanGrill_logo.jpg
+        website:
+          type: string
+          example: http://www.cielobluecantina.com
+        urls:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              label:
+                type: string
+            example:
+              url: http://www.ciellobluemexreservations.com
+              laber: Reservations
+        description:
+          type: string
+          example: We provide our customers with a fun and happy environment along with our enthusiastic staff, always making sure our customers have the greatest time in our restaurants. We try to make everyone of our customers feel welcome, and to make them have a great experience with us.
+        email:
+          type: string
+          example: generalmgr@cielobluecantina.com
+        openingHours:
+          type: string
+          example: Mo,Tu,We,Th,Fr 09:00-12:00
+        hoursGeneralDescription:
+          type: string
+          example: Open 6 days a week, Tuesday to Sunday
+        conditionsOfAccess:
+          type: string
+          example: reservations accepted
+        locations:
+          type: array
+          items:
+            type: object
+            properties:
+              streetAddress:
+                type: integer
+                example: 197 Bloor St E
+              addressLocality:
+                type: string
+                example: Oshawa
+              addressRegion:
+                type: string
+                example: 'ON'
+              postalCode:
+                type: string
+                example: L1H 3M3
+              telephones:
+                type: array
+                items:
+                  type: string
+                example:
+                - 905-720-2326
+        categories:
+          type: array
+          items:
+            type: string
+            example: Food and Beverage
+        subCategories:
+          type: array
+          items:
+            type: string
+            example: Mexican Food
+        social:
+          type: object
+          properties:
+            facebookUrl:
+              type: instring
+              example: https://www.facebook.com/CieloBlueBelmont/
+            instagramUrl:
+              type: string
+              example: https://www.instagram.com/CieloBlueBelmont/
+            twitterUrl:
+              type: string
+              example: https://www.twitter.com/CieloBlueBelmont/
+            youtubeUrl:
+              type: string
+              example: https://www.youtube.com/CieloBlueBelmont/
+            yelpUrl:
+              type: string
+              example: https://www.yelp.com/biz/Cielo-Blue-Belmont
+        acceptedPaymentMethods:
+          type: array
+          items:
+            type: string
+          example:
+          - MasterCard
+          - Cash
+        images:
+          type: array
+          items:
+            type: string
+          example:
+          - https://assets.ownlocal.com/images/a78feabb-df16-4fde-87aa-fba233d71671.jpeg
+          - https://assets.ownlocal.com/images/bbfe0e1f-0d8a-40df-86bd-c6a2250c09ec.jpeg
+      required: []
+    unacceptableContent:
+      type: object
+      properties:
+        message:
+          type: string
+          example: A message indicating why the content was unacceptable
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Organization API key sent raw (no scheme prefix) in the Authorization header. Keys are issued by OwnLocal support; there is no self-serve key provisioning.
+externalDocs:
+  description: OwnLocal API Docs
+  url: https://api.docs.ownlocal.com/
