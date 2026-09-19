@@ -96,6 +96,8 @@ apis:
   humanURL: https://api.docs.ownlocal.com/
   baseURL: https://admin.austin.ownlocal.com
   tags:
+  - Business
+  tags_raw:
   - Businesses
   properties:
   - type: OpenAPI
