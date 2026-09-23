@@ -1,0 +1,38 @@
+{
+  "provider": "ownlocal",
+  "sources": [
+    "_original/ownlocal-swagger.json"
+  ],
+  "outputs": [
+    "ownlocal-ads-api-openapi.yml",
+    "ownlocal-businesses-api-openapi.yml",
+    "ownlocal-categories-api-openapi.yml",
+    "ownlocal-reports-data-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [
+    "ownlocal-swagger.json: dangling $ref: #/definitions/ad_reach",
+    "ownlocal-swagger.json: dangling $ref: #/definitions/business_reach"
+  ],
+  "warnings": [],
+  "notes": [
+    "4 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ownlocal-swagger.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "ownlocal-swagger.json: declared missing tag: Ads",
+    "ownlocal-swagger.json: declared missing tag: Businesses",
+    "ownlocal-swagger.json: declared missing tag: Categories",
+    "ownlocal-swagger.json: declared missing tag: Reports Data API",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/ownlocal-reports-data-api-openapi.yml: archived document superseded by a larger archived document",
+    "_original/ownlocal-categories-openapi.yml: archived document superseded by a larger archived document",
+    "_original/ownlocal-businesses-openapi.yml: archived document superseded by a larger archived document",
+    "_original/ownlocal-ads-openapi.yml: archived document superseded by a larger archived document",
+    "ownlocal-ads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ownlocal-businesses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ownlocal-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ownlocal-reports-data-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

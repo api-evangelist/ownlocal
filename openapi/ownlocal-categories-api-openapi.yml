@@ -2,47 +2,34 @@ openapi: 3.2.0
 info:
   title: OwnLocal Categories API
   version: v1
-  description: The OwnLocal business category and sub-category vocabulary used to classify businesses and filter ads.
-  contact:
-    name: OwnLocal Support
-    email: support@ownlocal.com
-    url: https://www.ownlocal.com/support/
-servers:
-- url: https://admin.austin.ownlocal.com
-  description: OwnLocal production API host (per the published API reference)
-security:
-- apiKey: []
 tags:
 - name: Categories
-  description: The OwnLocal business category and sub-category vocabulary used to classify businesses and filter ads.
 paths:
   /api/v1/categories:
     get:
+      summary: Retrieve a list of categories
       tags:
       - Categories
-      summary: Retrieve a list of categories
-      operationId: listCategories
+      security:
+      - apiKey: []
       parameters:
       - name: sortedBy
         in: query
-        required: false
+        example: createdAt,updatedAt,startDate,endDate
         schema:
           type: string
-        example: createdAt,updatedAt,startDate,endDate
       - name: page
         in: query
-        required: false
+        example: 2
         schema:
           type: integer
           format: int64
-        example: 2
       - name: size
         in: query
-        required: false
+        example: 20
         schema:
           type: integer
           format: int64
-        example: 20
       responses:
         '200':
           description: categories found
@@ -52,8 +39,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/category'
-      security:
-      - apiKey: []
+      operationId: getApiV1Categories
+      x-operation-id-source: derived
 components:
   schemas:
     category:
@@ -80,7 +67,3 @@ components:
       type: apiKey
       name: Authorization
       in: header
-      description: Organization API key sent raw (no scheme prefix) in the Authorization header. Keys are issued by OwnLocal support; there is no self-serve key provisioning.
-externalDocs:
-  description: OwnLocal API Docs
-  url: https://api.docs.ownlocal.com/
