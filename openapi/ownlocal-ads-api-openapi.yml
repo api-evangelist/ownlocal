@@ -294,6 +294,52 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    offer:
+      type: object
+      properties:
+        offerUuid:
+          type: string
+          example: bbfdc747-b2c9-4232-be7a-81dbf5290af4
+          format: uuid
+        offerImage:
+          type: string
+          example: https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png
+        title:
+          type: string
+          example: 40% Off Full Interior Detail Package
+        description:
+          type: string
+        originalPrice:
+          type: string
+        discountPercentage:
+          type: string
+          example: '40'
+        discountPrice:
+          type: string
+        discountOff:
+          type: string
+        newPrice:
+          type: string
+        bogo:
+          type: boolean
+          example: 'false'
+        free:
+          type: boolean
+          example: 'false'
+        validThrough:
+          type: string
+        gtin8:
+          type: array
+          items:
+            type: object
+            properties:
+              class:
+                type: integer
+                format: int64
+      required:
+      - offerUuid
+      - offerImage
+      - title
     ad:
       type: object
       properties:
@@ -414,52 +460,6 @@ components:
       - endDate
       - dateModified
       - dateCreated
-    offer:
-      type: object
-      properties:
-        offerUuid:
-          type: string
-          example: bbfdc747-b2c9-4232-be7a-81dbf5290af4
-          format: uuid
-        offerImage:
-          type: string
-          example: https://ownlocal.imgix.net/offers/bbfdc747-b2c9-4232-be7a-81dbf5290af4.png
-        title:
-          type: string
-          example: 40% Off Full Interior Detail Package
-        description:
-          type: string
-        originalPrice:
-          type: string
-        discountPercentage:
-          type: string
-          example: '40'
-        discountPrice:
-          type: string
-        discountOff:
-          type: string
-        newPrice:
-          type: string
-        bogo:
-          type: boolean
-          example: 'false'
-        free:
-          type: boolean
-          example: 'false'
-        validThrough:
-          type: string
-        gtin8:
-          type: array
-          items:
-            type: object
-            properties:
-              class:
-                type: integer
-                format: int64
-      required:
-      - offerUuid
-      - offerImage
-      - title
     unacceptableContent:
       type: object
       properties:

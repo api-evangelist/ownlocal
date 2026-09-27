@@ -234,12 +234,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    unacceptableContent:
-      type: object
-      properties:
-        message:
-          type: string
-          example: A message indicating why the content was unacceptable
     business:
       type: object
       properties:
@@ -359,6 +353,12 @@ components:
           - https://assets.ownlocal.com/images/a78feabb-df16-4fde-87aa-fba233d71671.jpeg
           - https://assets.ownlocal.com/images/bbfe0e1f-0d8a-40df-86bd-c6a2250c09ec.jpeg
       required: []
+    unacceptableContent:
+      type: object
+      properties:
+        message:
+          type: string
+          example: A message indicating why the content was unacceptable
   securitySchemes:
     apiKey:
       type: apiKey
