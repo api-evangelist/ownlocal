@@ -186,6 +186,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/ownlocal-capability-edges.yml
+  name: OwnLocal Business Capability Map
 - type: Overlay
   url: overlays/ownlocal-ads-overlay.yaml
 - type: Overlay
