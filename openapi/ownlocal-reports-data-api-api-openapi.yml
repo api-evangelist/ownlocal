@@ -76,6 +76,59 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    business_report:
+      type: object
+      properties:
+        start_date:
+          type: string
+          example: '2020-06-01'
+          format: date
+        end_date:
+          type: string
+          example: '2020-07-01'
+          format: date
+        business_name:
+          type: string
+          example: My Local Business
+          format: string
+        business_id:
+          type: string
+          example: 2db5e240-c098-4d59-b3a3-bc7b7abc2c4c
+          format: uuid
+        reach_report:
+          type: object
+          items:
+            $ref: '#/components/schemas/business_reach'
+          example:
+            print_distribution: 0
+            online_impressions:
+              overall: 277160
+            total_ads: 13
+            directory:
+              days: 31
+              impressions: 0
+            origami:
+              ads: 9
+              days: 10
+              impressions:
+                overall: 277160
+            interaction_breakdown:
+              breakdowns:
+                overall:
+                  total_clicks: 209
+                  about_us_clicks: 1
+                  contact_clicks: 0
+                  expand_ad_unit_clicks: 181
+                  print_ad_clicks: 0
+                  website_clicks: 19
+                  facebook_clicks: 0
+                  twitter_clicks: 0
+                  instagram_clicks: 0
+                  yelp_clicks: 0
+                  call_clicks: 1
+                  directions_clicks: 7
+                  contact_form_submits: 0
+                  share: 0
     ads_report:
       type: object
       properties:
@@ -144,59 +197,6 @@ components:
                     directions_clicks: 0
                     contact_form_submits: 0
                     share: 0
-    business_report:
-      type: object
-      properties:
-        start_date:
-          type: string
-          example: '2020-06-01'
-          format: date
-        end_date:
-          type: string
-          example: '2020-07-01'
-          format: date
-        business_name:
-          type: string
-          example: My Local Business
-          format: string
-        business_id:
-          type: string
-          example: 2db5e240-c098-4d59-b3a3-bc7b7abc2c4c
-          format: uuid
-        reach_report:
-          type: object
-          items:
-            $ref: '#/components/schemas/business_reach'
-          example:
-            print_distribution: 0
-            online_impressions:
-              overall: 277160
-            total_ads: 13
-            directory:
-              days: 31
-              impressions: 0
-            origami:
-              ads: 9
-              days: 10
-              impressions:
-                overall: 277160
-            interaction_breakdown:
-              breakdowns:
-                overall:
-                  total_clicks: 209
-                  about_us_clicks: 1
-                  contact_clicks: 0
-                  expand_ad_unit_clicks: 181
-                  print_ad_clicks: 0
-                  website_clicks: 19
-                  facebook_clicks: 0
-                  twitter_clicks: 0
-                  instagram_clicks: 0
-                  yelp_clicks: 0
-                  call_clicks: 1
-                  directions_clicks: 7
-                  contact_form_submits: 0
-                  share: 0
   securitySchemes:
     apiKey:
       type: apiKey
