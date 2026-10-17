@@ -414,6 +414,12 @@ components:
       - endDate
       - dateModified
       - dateCreated
+    unacceptableContent:
+      type: object
+      properties:
+        message:
+          type: string
+          example: A message indicating why the content was unacceptable
     offer:
       type: object
       properties:
@@ -460,12 +466,6 @@ components:
       - offerUuid
       - offerImage
       - title
-    unacceptableContent:
-      type: object
-      properties:
-        message:
-          type: string
-          example: A message indicating why the content was unacceptable
   securitySchemes:
     apiKey:
       type: apiKey
